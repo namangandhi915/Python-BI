@@ -1,9 +1,0 @@
-
-# Python BI Studio - Local dataset storage
-stored_datasets/
-
-# Python virtual environment
-.venv/
-
-# Python cache
-__pycache__/

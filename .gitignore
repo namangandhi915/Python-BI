@@ -41,6 +41,14 @@
 # Large source audit archives
 **/Python_BI_Studio_SOURCE_AUDIT.zip*
 
+# Generated test, benchmark, and release evidence
+**/acceptance_results/
+**/assurance_results/
+**/benchmark_artifacts/
+**/professor_results/
+**/release_results/
+**/acceptance_artifacts/FAKE_PERFORMANCE_*.csv
+
 # Temporary diagnostic scripts
 **/dashboard_timing_probe.py
 **/dashboard_profile_probe.py
@@ -56,3 +64,6 @@ desktop.ini
 # Installers
 *.exe
 *.msi
+
+# Windows application shortcuts
+*.lnk

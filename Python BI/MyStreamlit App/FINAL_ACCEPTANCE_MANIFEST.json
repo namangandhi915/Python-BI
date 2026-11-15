@@ -31,7 +31,7 @@
   "privacy": "Local-only. No user data, stored_datasets, .venv, secrets or public-hosting configuration",
   "browser_acceptance": "PENDING until user verifies",
   "files": {
-    "README_INSTALL.md": "6a91173b0da537df2fe93be523e2ef26c92ca17d07b961d589f2325a2bbaeeed",
+    "README_INSTALL.md": "1a3d2bdbcf2401b8e67e3b430a629ef5970129952de2fc3e97531d3071d217eb",
     "app.py": "2da4594ef2db20c2cc026c95104a23ceb7d2e5eac15f806033efd388d0602d1e",
     "build_acceptance_test_data.py": "aff3acd31bcb681e61ff08f8940c176cb03b567d3a282e7e45b9a06befa9b0ec",
     "commerce_engine.py": "8c5ec204bccfbcada81d18d388941d17072c3572fe8e6c199a660e5d54d46fe6",
