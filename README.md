@@ -3,6 +3,14 @@
 A local Streamlit business intelligence application for exploring datasets,
 building dashboards, comparing periods, and reviewing financial metrics.
 
+## Project layout
+
+`Python BI/MyStreamlit App/` is the single application folder. It contains
+`app.py`, the supporting modules, `requirements.txt`, tests, and the user
+guides. The former `Python_BI_Studio_Verification/` folder was a duplicate
+copy and has been removed. There is no second application or 8502-port
+launcher.
+
 ## Run locally
 
 From the project directory:
@@ -15,9 +23,10 @@ python -m pip install -r requirements.txt
 python start_local.py
 ```
 
-Then open <http://127.0.0.1:8501>. The launcher binds to loopback and does not
-deploy the app publicly. See [the app guide](Python%20BI/MyStreamlit%20App/README_INSTALL.md)
-and [operating docs](Python%20BI/MyStreamlit%20App/docs/) for details.
+Then open <http://127.0.0.1:8501>. `start_local.py` uses loopback address
+`127.0.0.1` and port `8501`; it does not deploy the app publicly. See
+[the app guide](Python%20BI/MyStreamlit%20App/README_INSTALL.md) and
+[operating docs](Python%20BI/MyStreamlit%20App/docs/) for details.
 
 ## Verify
 
