@@ -1,10 +1,12 @@
-# Install and run
+# Install, run, and verify
 
-Python BI Studio runs locally with Streamlit.
+The project has one Streamlit entry point, `app.py`. Supporting code is in
+`modules/`; automated tests are in `tests/`; command-line tools are in
+`scripts/`; data assets are in `data/`; and CSS is in `assets/`.
 
-## Windows
+## Windows setup
 
-Open PowerShell in this folder and run:
+Run these commands from this folder:
 
 ```powershell
 python -m venv .venv
@@ -13,17 +15,16 @@ python -m pip install -r requirements.txt
 python start_local.py
 ```
 
-Open <http://127.0.0.1:8501>. To stop the app, press `Ctrl+C` in the
-terminal. `start_local.py` listens only on the local computer.
+Open <http://127.0.0.1:8501>. The app binds to the local computer only. Stop it
+with `Ctrl+C` in the terminal.
 
-## Checks
+## Automated checks
 
 ```powershell
-python verify_final_release.py
-python run_final_acceptance.py --rows 10000
+python scripts/verify_final_release.py
+python scripts/run_final_gate_tests.py
+python scripts/run_final_acceptance.py --rows 10000
 ```
 
-Acceptance checks use synthetic data and create local evidence in
-`acceptance_results/`. Complete the browser checks in
-`docs/05_GATE_BROWSER_CHECKLIST.md` separately; automated checks do not certify
-real data mappings or browser behavior.
+The checks use synthetic data and write disposable output beneath `outputs/`.
+Complete browser checks separately using `docs/05_GATE_BROWSER_CHECKLIST.md`.

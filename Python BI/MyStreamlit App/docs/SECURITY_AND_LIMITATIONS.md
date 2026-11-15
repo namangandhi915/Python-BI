@@ -2,7 +2,7 @@
 
 This is a **local development release** and does not certify production security, regulated financial compliance or investment suitability.
 
-- `run_enterprise_assurance.py` uses deterministic synthetic input unless a test-specific CSV is explicitly supplied. It never updates `stored_datasets/` or `Data/`.
+- `scripts/run_enterprise_assurance.py` uses deterministic synthetic input unless a test-specific CSV is explicitly supplied. It never updates `stored_datasets/` or `data/business/`.
 - The Home assurance download includes only column names, data types and missing-count statistics; column names themselves could be sensitive, so review before sharing.
 - The SHA-256 manifest checks file integrity against the packaged release. It is not a signed supply-chain attestation and cannot distinguish an independently modified copy from a maliciously replaced package.
 - Full-source missing/duplicate scans are opt-in and can consume resources on large datasets. Sampled counts must not be represented as exact full-source counts.

@@ -6,7 +6,13 @@ import plotly.express as px
 import json
 import hashlib
 from pathlib import Path
+import sys
 from uuid import uuid4
+
+MODULES_DIR = Path(__file__).resolve().parent / "modules"
+if str(MODULES_DIR) not in sys.path:
+    sys.path.insert(0, str(MODULES_DIR))
+
 from commerce_engine import render_commercial_intelligence, calculate_commercial_metrics
 from quality_engine import quality_overview, quality_table, missing_records
 from executive_dashboard import render_executive_dashboard
@@ -251,7 +257,7 @@ def delete_saved_dataset(stored_name):
 # --------------------------------------------------
 
 # Unified style tokens live in bi_theme.css (not duplicated inline).
-THEME_FILE = Path(__file__).resolve().parent / "bi_theme.css"
+THEME_FILE = Path(__file__).resolve().parent / "assets" / "bi_theme.css"
 if THEME_FILE.exists():
     st.markdown(
         "<style>" + THEME_FILE.read_text(encoding="utf-8") + "</style>",
@@ -1077,7 +1083,7 @@ elif page == "Dashboard":
         if "uploaded_df" not in st.session_state:
             try:
                 st.session_state["uploaded_df"] = pd.read_excel(
-                    "Data/Python_BI_Complete_Business_Dataset.xlsx",
+                    "data/business/Python_BI_Complete_Business_Dataset.xlsx",
                     sheet_name="Business Data"
                 )
             
@@ -1738,12 +1744,12 @@ elif page == "Dashboard":
 
             try:
                 product_details = pd.read_excel(
-                    "Data/Python_BI_Complete_Business_Dataset.xlsx",
+                    "data/business/Python_BI_Complete_Business_Dataset.xlsx",
                     sheet_name="Product Details"
                 )
 
                 customer_details = pd.read_excel(
-                    "Data/Python_BI_Complete_Business_Dataset.xlsx",
+                    "data/business/Python_BI_Complete_Business_Dataset.xlsx",
                     sheet_name="Customer Details"
                 )
 

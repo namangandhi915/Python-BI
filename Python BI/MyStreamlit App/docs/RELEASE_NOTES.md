@@ -4,16 +4,16 @@ Baseline: user-confirmed Enterprise Assurance release, all 12 browser checks pas
 
 ### Changed
 - `app.py`: imports two optional display helpers, replaces duplicate generic top heading with context-aware page masthead; adds one collapsed Home release panel.
-- `bi_theme.css`: replaces accumulated per-batch overrides with one light, responsive, token-driven stylesheet and retains original Home components.
+- `assets/bi_theme.css`: replaces accumulated per-batch overrides with one light, responsive, token-driven stylesheet and retains original Home components.
 
 ### Added
-- `design_system.py`: escaped four-mode page masthead; safe active dataset name.
-- `deployment_audit.py`: conservative, non-sensitive local deployment checks and non-negotiable security blockers.
-- `operations_ui.py`: collapsed Home readiness dashboard.
-- `release_evidence.py` / `release_cli.py`: static JSON, HTML and aggregate ZIP summaries without transaction rows.
-- `dependency_snapshot.py`: opt-in direct dependency version snapshot.
-- `prepare_privacy.py`: optional append-only .gitignore privacy improvement.
-- `run_design_release_tests.py`: one full regression command and summary JSON.
+- `modules/design_system.py`: escaped four-mode page masthead; safe active dataset name.
+- `modules/deployment_audit.py`: conservative, non-sensitive local deployment checks and non-negotiable security blockers.
+- `modules/operations_ui.py`: collapsed Home readiness dashboard.
+- `modules/release_evidence.py` / `scripts/release_cli.py`: static JSON, HTML and aggregate ZIP summaries without transaction rows.
+- `scripts/dependency_snapshot.py`: opt-in direct dependency version snapshot.
+- `scripts/prepare_privacy.py`: optional append-only .gitignore privacy improvement.
+- `scripts/run_design_release_tests.py`: one full regression command and summary JSON.
 - New tests, deployment documentation and versioned SHA-256 installation verifier.
 
 ### Not changed

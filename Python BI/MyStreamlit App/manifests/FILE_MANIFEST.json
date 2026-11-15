@@ -1,0 +1,22 @@
+{
+  "product": "Python BI Studio Enterprise Assurance Release",
+  "baseline": "Verified: Phase 3 Batch 14, Phase 6 Batch 4, Scale & Reliability Batch 2",
+  "release": "Enterprise Assurance Wave 1, combined workstreams A–F",
+  "files": {
+    "app.py": "019c9bc4a36d751de5a6db5ac7886b6936b2da63cffd9456539bd245dccef034",
+    "assets/bi_theme.css": "6338efbaf1f9a0b78c812217a49edc657709161e66cd40cc109f9b45dfb906db",
+    "modules/assurance_contracts.py": "f10eee401fac0af8742634605c0d66d232916cae0efb76d4773ae9f4b8dd2074",
+    "modules/assurance_phase45.py": "cf0d74f3955c2a058e824f4aa7077afbb77859fe4e9f5897da558055f44f6a19",
+    "modules/assurance_project.py": "02ff62f2e1dd31db56246b6dae173a549ceda30124812bf49df981e65ed37c3f",
+    "modules/assurance_reports.py": "e344b60dccd2d4cca6752eb4299760c957ce1d81b5f3127efcf18776b00aae70",
+    "modules/assurance_performance.py": "3d2f77d8472e0967f65a6bfca680b0b89b27730e6597a5a70f1c12635976627e",
+    "modules/assurance_ui.py": "c03ab942d795481666056f7fdab69154dff87afceefd64689d65722e81fb905a",
+    "scripts/run_enterprise_assurance.py": "58d03e1e07ae09c97b587ed0614569c7ea09195150c0f52c5956a8db20526fc1",
+    "tests/test_assurance_contracts.py": "8aefe09477be49cdc4babec0f7b377b90c7fd941ab54fafd216f00313e914718",
+    "tests/test_phase45_acceptance.py": "b0d57a6e46ccbef537f374e4c698ff32b2a938fc4f3c2e0f33ee0542ecdaa8db",
+    "tests/test_assurance_reports.py": "057819bfcfd1b5b61830233e5a9cde59b7df0e0f54c19962c33915c5799f4037",
+    "tests/test_assurance_performance.py": "856c62896fa0b5755292d243791da952b46fea88e629ba03792ef10a39df9c5d",
+    "tests/test_assurance_ui_mock.py": "139c3119103f05a4b9860c8543404f5cb131503449aed21ba2049eb1a1172fb7",
+    "scripts/verify_assurance_release.py": "e79d4cae415fdc65284243fcfc5845ff86fa2094bf3b8b6bc32d3e62055dec82"
+  }
+}

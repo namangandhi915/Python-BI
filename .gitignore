@@ -48,6 +48,7 @@
 **/professor_results/
 **/release_results/
 **/acceptance_artifacts/FAKE_PERFORMANCE_*.csv
+**/outputs/
 
 # Temporary diagnostic scripts
 **/dashboard_timing_probe.py

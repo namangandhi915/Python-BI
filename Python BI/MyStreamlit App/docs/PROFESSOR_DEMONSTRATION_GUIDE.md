@@ -17,9 +17,9 @@ Private local demonstration in VS Code + Chrome, not a hosted website. Use `pyth
 
 ## Materials to prepare
 
-- Run the local combined regression suite; keep `professor_results/LOCAL_TEST_RESULTS.json`.
-- Run `python local_review_cli.py --rows 10000` and `python create_demo_datasets.py --rows 120`.
-- If useful, inspect the optional offline `professor_results/PROFESSOR_REVIEW_PACKET.zip` before the meeting; no website panel or extra navigation is required.
+- Run the local combined regression suite; keep `outputs/professor_results/LOCAL_TEST_RESULTS.json`.
+- Run `python scripts/local_review_cli.py --rows 10000` and `python scripts/create_demo_datasets.py --rows 120`.
+- If useful, inspect the optional offline `outputs/professor_results/PROFESSOR_REVIEW_PACKET.zip` before the meeting; no website panel or extra navigation is required.
 - Record actual performance figures from your laptop if comparing devices; do not reuse benchmark timings as universal guarantees.
 - Ask the professor to evaluate **functionality, correctness, interface, methodology, limitations and documentation**.
 

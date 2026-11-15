@@ -1,0 +1,30 @@
+{
+  "product": "Python BI Studio",
+  "release": "Enterprise Design & Release Readiness 1",
+  "baseline": "Verified Enterprise Assurance local release; not a public deployment",
+  "files": {
+    "app.py": "019c9bc4a36d751de5a6db5ac7886b6936b2da63cffd9456539bd245dccef034",
+    "assets/bi_theme.css": "6338efbaf1f9a0b78c812217a49edc657709161e66cd40cc109f9b45dfb906db",
+    "modules/design_system.py": "c4f8d93e75b6d9432c80a8b0f6311ab5790071ad575b651f804fb0375bab5f19",
+    "modules/deployment_audit.py": "d3d10d8606c5d081b2a4b927c7f65fb85e975bd8b74bc7dbe405d629e4b02898",
+    "modules/release_evidence.py": "62d2cd9c3644333c283bfddb7040e66e39e6d0d3e26bc62be7eefacc380682e6",
+    "modules/operations_ui.py": "b7998524ed82f7dac7cd65979c4bc03552b231d025123f269d98c79474965014",
+    "scripts/release_cli.py": "de4acf8ee9c9746da8a4687d46fd0a4107108613a3ad999f0c67b6b83be16968",
+    "scripts/dependency_snapshot.py": "288b8cfea0ac20411acc2d80ef0bf98e7d50b5b8a324d7c5d11fb9ed47b5df74",
+    "scripts/prepare_privacy.py": "8f972bd418648bfaef2ebb5a918d399de4adbc4aac1b97d0f5ad27f55f226051",
+    "scripts/run_design_release_tests.py": "b3f2540519b1787c5db86236669e69e6b4cc3bc463dc7cf59bfac3f82d5de67e",
+    "scripts/verify_design_release.py": "62c0e4a92a4c2a3fba1aaf1ea6279490e26048d7db2f6b630f979a914c450ac7",
+    "tests/test_design_system.py": "204cc613ad0c6b655d54661cd466479ac207d2d1927fe861fe53b3ac5e3802c4",
+    "tests/test_deployment_audit.py": "8cce4296a54d989e13d8ef76d5041b8c49707dd0728e08e1ff78e5f816efd7f5",
+    "tests/test_release_evidence.py": "c33d9fac6de4fbddc7d9dba7e7530ea168342891a46c1860657937520fa05484",
+    "tests/test_operations_ui_mock.py": "b894f6647d432cf0329c7dedd0f7f4448ee5703dfd436ab76999153e6f9dbfc7",
+    "tests/test_design_integration.py": "b51f5dfc5dfb8fd51ae203e487760e67fa9e753d9509b73f33a6edfe5febeb10",
+    "tests/test_design_release_manifest.py": "75283462b81d5ca335d449a067fe3cce0083a7299ec37452a160e60cefb5ac43",
+    "README_INSTALL.md": "74ebdbfcf56be166a3322bab0de8eed665f0ea8bd9367dfc4b6d6554317930e6",
+    "docs/DEPLOYMENT_SECURITY_GATES.md": "f80874be73108b11ce853ab294ded366c9347684b2bd75cce51f9b8f4beebbe2",
+    "docs/DESIGN_SYSTEM.md": "38c716da6db5b342db418a189732f2915a7e5789212f97c0f888b714fd74760b",
+    "docs/OPERATIONS_RUNBOOK.md": "1b79ae68fae4d822f8a15b4c0a0196cda962c94f98178f6903c6b955c8d426ed",
+    "docs/RELEASE_ACCEPTANCE.md": "36609614fbd1c276e00d5976bb6fc34e8ddcdd86ba3f8b06aea36d849212057e",
+    "docs/RELEASE_NOTES.md": "40f39299fc9affaba69dde7f69f8d13e7323356b936d436d53696c2c3adb0cc1"
+  }
+}

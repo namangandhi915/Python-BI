@@ -1,23 +1,35 @@
-# VS Code operations runbook — Windows
+# Operations runbook
 
-## Start work
-1. Open VS Code and **File → Open Folder → MyStreamlit App**.
-2. Terminal → New Terminal; if `(.venv)` is not displayed, `\.venv\Scripts\Activate.ps1`.
-3. Run `python -m streamlit run app.py`; open http://localhost:8501.
-4. Confirm Dataset Library shows the original business workbook (20 records, 14 columns), if that is your intended active dataset.
+## Start the app
 
-## Stop safely
-1. Save All (`Ctrl+K`, then `S`) in VS Code.
-2. Stop the terminal process with `Ctrl+C`.
-3. Close browser, Excel and VS Code after saving any manual changes.
-4. Never delete `stored_datasets`, `.venv`, `Data`, or the most recent backup folder during routine shutdown.
+Open a terminal in `Python BI/MyStreamlit App` and run:
 
-## Offline verification, one batch
-1. In the project terminal, run `python verify_design_release.py`.
-2. Run `python run_design_release_tests.py` (full previous regression suite; no Streamlit browser needed).
-3. Run `python release_cli.py` (generates minimal offline JSON, HTML, ZIP readiness evidence).
-4. Run `python run_enterprise_assurance.py --rows 10000` if reviewing the old acceptance report too.
-5. Restart Streamlit and perform the 12-point browser review in `RELEASE_ACCEPTANCE.md`.
+```powershell
+.\.venv\Scripts\Activate.ps1
+python start_local.py
+```
 
-## Rollback
-If the new release introduces a runtime error, stop Streamlit, then restore ONLY the replaced `app.py` and `bi_theme.css` from `backup_before_design_release`. New Python helpers may remain unused. Never roll back the Dataset Library or delete business data to troubleshoot a design change.
+The app is available at <http://127.0.0.1:8501>. Stop it with `Ctrl+C`.
+
+## Project folders
+
+- `modules/`: business, finance, reporting, and UI modules
+- `tests/`: automated regression and acceptance tests
+- `scripts/`: launch support, verification, and reporting commands
+- `assets/`: theme stylesheet
+- `data/`: sample workbook and synthetic fixtures
+- `docs/`: operating, accounting, and acceptance guides
+- `manifests/`: SHA-256 integrity records
+- `outputs/`: regenerable local test and release reports
+
+## Verify changes
+
+```powershell
+python scripts/verify_final_release.py
+python scripts/run_final_gate_tests.py
+python scripts/run_final_acceptance.py --rows 10000
+```
+
+These checks do not replace the browser and real-data review in
+`05_GATE_BROWSER_CHECKLIST.md`. Keep user datasets under `stored_datasets/` and
+back them up separately before testing recovery procedures.
