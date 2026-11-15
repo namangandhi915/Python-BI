@@ -1,0 +1,168 @@
+{
+  "date_utc": "2026-11-09T15:12:57+00:00",
+  "scope": "Local-only automated checks; browser and academic review still manual",
+  "results": [
+    {
+      "test": "test_local_file_guard.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_local_recovery.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_sector_acceptance.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_professor_review.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_local_launcher.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_local_app_wiring.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_local_workload.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_synthetic_sector_data.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_no_review_panel.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_local_release_manifest.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_design_system.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_deployment_audit.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_release_evidence.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_operations_ui_mock.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_design_integration.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_assurance_contracts.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_phase45_acceptance.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_assurance_reports.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_assurance_performance.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_assurance_ui_mock.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_scale_batch12.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_explorer_ui_mock.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_investment_foundation.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_investment_forecasting.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_ui_integration_local.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_phase3_batch2.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_phase3_batch34.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_phase3_batch56.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_phase3_batch78.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_phase3_batch910.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_phase3_batch1112.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "test": "test_phase3_batch1314.py",
+      "status": "PASS",
+      "exit_code": 0
+    }
+  ],
+  "passed": 32,
+  "failed": 0
+}

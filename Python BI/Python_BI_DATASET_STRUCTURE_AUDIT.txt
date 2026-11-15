@@ -1,0 +1,105 @@
+PYTHON BI STUDIO - DATASET STRUCTURE AUDIT
+NO CUSTOMER OR TRANSACTION ROW VALUES INCLUDED
+
+
+FOLDER: Data
+
+FILE: Data/Python_BI_Complete_Business_Dataset.xlsx
+SHEET: Business Data
+APPROX ROWS: 20
+COLUMNS: 14
+HEADERS: ['TransactionID', 'Date', 'ProductID', 'Product', 'CustomerID', 'Customer Name', 'Sales', 'Quantity', 'City', 'Region', 'Unit Cost', 'Total Cost', 'Profit', 'Profit Margin (%)']
+SHEET: Product Details
+APPROX ROWS: 5
+COLUMNS: 4
+HEADERS: ['ProductID', 'Product', 'Category', 'Standard Unit Cost']
+SHEET: Customer Details
+APPROX ROWS: 8
+COLUMNS: 4
+HEADERS: ['CustomerID', 'Customer Name', 'City', 'Region']
+SHEET: Read Me
+APPROX ROWS: 11
+COLUMNS: 2
+HEADERS: ['Item', 'Details']
+
+FOLDER: stored_datasets
+
+FILE: stored_datasets/018f15219caf428a87c0d634376e32be.xlsx
+SHEET: Business Data
+APPROX ROWS: 5
+COLUMNS: 10
+HEADERS: ['Date', 'Product', 'Sales', 'Quantity', 'City', 'Region', 'Unit Cost', 'Total Cost', 'Profit', 'Profit Margin (%)']
+SHEET: Read Me
+APPROX ROWS: 6
+COLUMNS: 1
+HEADERS: ['Sample dataset for Python BI Studio']
+
+FILE: stored_datasets/32ae9a3177954d65bcd481c8d2bf6c64.csv
+DATA ROWS: 120
+COLUMNS: 9
+HEADERS: ['RecordID', 'Date', 'ProductCategory', 'GrossSales', 'CostOfGoods', 'Discounts', 'Returns', 'StoreExpenses', 'TaxExpense']
+
+FILE: stored_datasets/620d7c8dde0546e0bea2525075758337.xlsx
+EXACT DUPLICATE OF: Data/Python_BI_Complete_Business_Dataset.xlsx
+
+FILE: stored_datasets/a71cba02a6c2406092dd72df56689dc8.csv
+DATA ROWS: 100000
+COLUMNS: 14
+HEADERS: ['TransactionID', 'Date', 'ProductID', 'Product', 'CustomerID', 'Customer Name', 'Sales', 'Quantity', 'City', 'Region', 'Unit Cost', 'Total Cost', 'Profit', 'Profit Margin (%)']
+
+FILE: stored_datasets/a7cc0bf0aaa04c79a6c419664c2f9a3d.csv
+DATA ROWS: 500000
+COLUMNS: 14
+HEADERS: ['TransactionID', 'Date', 'ProductID', 'Product', 'CustomerID', 'Customer Name', 'Sales', 'Quantity', 'City', 'Region', 'Unit Cost', 'Total Cost', 'Profit', 'Profit Margin (%)']
+
+FILE: stored_datasets/bd83428befb645a384d955bbf15eab76.csv
+DATA ROWS: 120
+COLUMNS: 9
+HEADERS: ['RecordID', 'Date', 'ProductionLine', 'InvoiceValue', 'ProductionCost', 'TradeDiscount', 'RejectedReturns', 'FactoryExpenses', 'BusinessTax']
+
+FILE: stored_datasets/df8ea7564d354114875a132e5e87a5ee.csv
+DATA ROWS: 10000
+COLUMNS: 14
+HEADERS: ['TransactionID', 'Date', 'ProductID', 'Product', 'CustomerID', 'Customer Name', 'Sales', 'Quantity', 'City', 'Region', 'Unit Cost', 'Total Cost', 'Profit', 'Profit Margin (%)']
+
+FOLDER: acceptance_artifacts
+
+FILE: acceptance_artifacts/FAKE_PERFORMANCE_10000.csv
+EXACT DUPLICATE OF: stored_datasets/df8ea7564d354114875a132e5e87a5ee.csv
+
+FILE: acceptance_artifacts/FAKE_PERFORMANCE_100000.csv
+EXACT DUPLICATE OF: stored_datasets/a71cba02a6c2406092dd72df56689dc8.csv
+
+FILE: acceptance_artifacts/FAKE_PERFORMANCE_500000.csv
+EXACT DUPLICATE OF: stored_datasets/a7cc0bf0aaa04c79a6c419664c2f9a3d.csv
+
+FOLDER: benchmark_artifacts
+
+FILE: benchmark_artifacts/synthetic_explorer_500000.csv
+EXACT DUPLICATE OF: stored_datasets/a7cc0bf0aaa04c79a6c419664c2f9a3d.csv
+
+FOLDER: demo_artifacts
+
+FILE: demo_artifacts/FAKE_manufacturing_120.csv
+EXACT DUPLICATE OF: stored_datasets/bd83428befb645a384d955bbf15eab76.csv
+
+FILE: demo_artifacts/FAKE_retail_120.csv
+EXACT DUPLICATE OF: stored_datasets/32ae9a3177954d65bcd481c8d2bf6c64.csv
+
+FILE: demo_artifacts/FAKE_services_120.csv
+DATA ROWS: 120
+COLUMNS: 9
+HEADERS: ['RecordID', 'Date', 'ServiceLine', 'ServiceFees', 'DeliveryCosts', 'ClientCredits', 'Refunds', 'OfficeExpenses', 'TaxesPaid']
+
+FOLDER: samples
+
+FILE: samples/synthetic_market_prices_TEST_ONLY.csv
+DATA ROWS: 100
+COLUMNS: 2
+HEADERS: ['Date', 'Close']
+
+DATASET LIBRARY INTEGRITY
+ACTIVE FILE EXISTS: True
+ACTIVE HASH MATCHES: True
+SAVED DATASET LABEL ENTRIES: 1
+LABELS WITHOUT SAVED FILES: 0

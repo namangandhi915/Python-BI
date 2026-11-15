@@ -1,0 +1,58 @@
+
+# Python BI Studio - GitHub Repository
+
+# Virtual environments
+**/.venv/
+**/venv/
+**/env/
+
+# Python caches
+**/__pycache__/
+*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/.ipynb_checkpoints/
+
+# Credentials and environment files
+**/.env
+**/.env.*
+!**/.env.example
+**/.streamlit/secrets.toml
+**/.streamlit/secrets.*.toml
+*.pem
+*.key
+
+# Private local Dataset Library
+**/stored_datasets/
+
+# Large synthetic performance datasets
+**/FAKE_PERFORMANCE_100000.csv
+**/FAKE_PERFORMANCE_500000.csv
+**/synthetic_explorer_500000.csv
+
+# Historical backup folders
+**/backup_before_*/
+
+# Historical Python backups
+**/app_backup*.py
+**/app_before*.py
+
+# Large source audit archives
+**/Python_BI_Studio_SOURCE_AUDIT.zip*
+
+# Temporary diagnostic scripts
+**/dashboard_timing_probe.py
+**/dashboard_profile_probe.py
+
+# Editor and operating system files
+**/.vscode/
+**/.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+
+# Installers
+*.exe
+*.msi

@@ -1,0 +1,814 @@
+PYTHON BI STUDIO - LARGE ZIP AUDIT
+
+MEMBER COUNT: 225
+UNCOMPRESSED BYTES: 209455474
+
+
+MEMBER: benchmark_artifacts/benchmark_500k.json
+SIZE: 603
+STATUS: EXACT ROOT MATCH
+
+MEMBER: benchmark_artifacts/synthetic_explorer_500000.csv
+SIZE: 60427853
+STATUS: NOT BYTE-COMPARED
+
+MEMBER: Data/Python_BI_Complete_Business_Dataset.xlsx
+SIZE: 12270
+STATUS: EXACT ROOT MATCH
+
+MEMBER: demo_artifacts/FAKE_manufacturing_120.csv
+SIZE: 8323
+STATUS: EXACT ROOT MATCH
+
+MEMBER: demo_artifacts/FAKE_retail_120.csv
+SIZE: 8016
+STATUS: EXACT ROOT MATCH
+
+MEMBER: demo_artifacts/FAKE_services_120.csv
+SIZE: 8032
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/05_GATE_BROWSER_CHECKLIST.md
+SIZE: 6449
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/ACCEPTANCE_MATRIX.md
+SIZE: 2754
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/ACCOUNTING_ASSUMPTIONS.md
+SIZE: 2102
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/DEPLOYMENT_SECURITY_GATES.md
+SIZE: 2730
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/DESIGN_SYSTEM.md
+SIZE: 2260
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/FINAL_MANUAL_ACCEPTANCE.md
+SIZE: 1744
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/LOCAL_DATA_SAFETY_AND_LIMITS.md
+SIZE: 1849
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/LOCAL_RESTART_AND_BACKUP.md
+SIZE: 1845
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/OPERATIONS_RUNBOOK.md
+SIZE: 1496
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/PHASES_AND_ACCEPTANCE.md
+SIZE: 1706
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/PROFESSOR_DEMONSTRATION_GUIDE.md
+SIZE: 2362
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/PROFESSOR_FEEDBACK_TEMPLATE.md
+SIZE: 811
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/PROJECT_EFFORT_LOG.md
+SIZE: 841
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/RELEASE_ACCEPTANCE.md
+SIZE: 2328
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/RELEASE_CHANGELOG.md
+SIZE: 1340
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/RELEASE_NOTES.md
+SIZE: 1714
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/ROADMAP_FINAL_STATUS.md
+SIZE: 1744
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/ROLLBACK_AND_RESTART.md
+SIZE: 787
+STATUS: EXACT ROOT MATCH
+
+MEMBER: docs/SECURITY_AND_LIMITATIONS.md
+SIZE: 1730
+STATUS: EXACT ROOT MATCH
+
+MEMBER: professor_results/LOCAL_ACADEMIC_READINESS.json
+SIZE: 4423
+STATUS: EXACT ROOT MATCH
+
+MEMBER: professor_results/LOCAL_TEST_RESULTS.json
+SIZE: 3566
+STATUS: EXACT ROOT MATCH
+
+MEMBER: professor_results/PROFESSOR_REVIEW_PACKET.zip
+SIZE: 2593
+STATUS: EXACT ROOT MATCH
+
+MEMBER: professor_results/workload_500k.json
+SIZE: 761
+STATUS: EXACT ROOT MATCH
+
+MEMBER: release_results/regression_tests.json
+SIZE: 2673
+STATUS: EXACT ROOT MATCH
+
+MEMBER: release_results/release_readiness.html
+SIZE: 2783
+STATUS: EXACT ROOT MATCH
+
+MEMBER: release_results/release_readiness.json
+SIZE: 3069
+STATUS: EXACT ROOT MATCH
+
+MEMBER: release_results/release_readiness_pack.zip
+SIZE: 2877
+STATUS: EXACT ROOT MATCH
+
+MEMBER: samples/synthetic_market_prices_TEST_ONLY.csv
+SIZE: 1801
+STATUS: EXACT ROOT MATCH
+
+MEMBER: stored_datasets/018f15219caf428a87c0d634376e32be.xlsx
+SIZE: 7095
+STATUS: EXACT ROOT MATCH
+
+MEMBER: stored_datasets/32ae9a3177954d65bcd481c8d2bf6c64.csv
+SIZE: 8016
+STATUS: EXACT ROOT MATCH
+
+MEMBER: stored_datasets/620d7c8dde0546e0bea2525075758337.xlsx
+SIZE: 12270
+STATUS: EXACT ROOT MATCH
+
+MEMBER: stored_datasets/a71cba02a6c2406092dd72df56689dc8.csv
+SIZE: 12081261
+STATUS: NOT BYTE-COMPARED
+
+MEMBER: stored_datasets/a7cc0bf0aaa04c79a6c419664c2f9a3d.csv
+SIZE: 60427853
+STATUS: NOT BYTE-COMPARED
+
+MEMBER: stored_datasets/active_dataset.json
+SIZE: 182
+STATUS: EXACT ROOT MATCH
+
+MEMBER: stored_datasets/bd83428befb645a384d955bbf15eab76.csv
+SIZE: 8323
+STATUS: EXACT ROOT MATCH
+
+MEMBER: stored_datasets/dataset_labels.json
+SIZE: 91
+STATUS: EXACT ROOT MATCH
+
+MEMBER: stored_datasets/df8ea7564d354114875a132e5e87a5ee.csv
+SIZE: 1201592
+STATUS: EXACT ROOT MATCH
+
+MEMBER: .gitignore
+SIZE: 136
+STATUS: EXACT ROOT MATCH
+
+MEMBER: app.py
+SIZE: 64689
+STATUS: EXACT ROOT MATCH
+
+MEMBER: app_backup.py
+SIZE: 1267
+STATUS: EXACT ROOT MATCH
+
+MEMBER: app_backup_before_persistence.py
+SIZE: 44714
+STATUS: EXACT ROOT MATCH
+
+MEMBER: app_before_phase3_batch2.py.py
+SIZE: 68737
+STATUS: EXACT ROOT MATCH
+
+MEMBER: app_before_phase3_batch34.py.py
+SIZE: 70381
+STATUS: EXACT ROOT MATCH
+
+MEMBER: app_before_phase3_workspace.py.py
+SIZE: 73002
+STATUS: EXACT ROOT MATCH
+
+MEMBER: assurance_contracts.py
+SIZE: 4275
+STATUS: EXACT ROOT MATCH
+
+MEMBER: assurance_performance.py
+SIZE: 4595
+STATUS: EXACT ROOT MATCH
+
+MEMBER: assurance_phase45.py
+SIZE: 7904
+STATUS: EXACT ROOT MATCH
+
+MEMBER: assurance_project.py
+SIZE: 2834
+STATUS: EXACT ROOT MATCH
+
+MEMBER: assurance_reports.py
+SIZE: 3168
+STATUS: EXACT ROOT MATCH
+
+MEMBER: assurance_ui.py
+SIZE: 2553
+STATUS: EXACT ROOT MATCH
+
+MEMBER: audit_exports.py
+SIZE: 2707
+STATUS: EXACT ROOT MATCH
+
+MEMBER: benchmark_explorer.py
+SIZE: 4746
+STATUS: EXACT ROOT MATCH
+
+MEMBER: benchmark_phase3.py
+SIZE: 4438
+STATUS: EXACT ROOT MATCH
+
+MEMBER: bi_theme.css
+SIZE: 10861
+STATUS: EXACT ROOT MATCH
+
+MEMBER: build_acceptance_test_data.py
+SIZE: 1110
+STATUS: EXACT ROOT MATCH
+
+MEMBER: business_metrics.py
+SIZE: 5575
+STATUS: EXACT ROOT MATCH
+
+MEMBER: chart_builder.py
+SIZE: 13652
+STATUS: EXACT ROOT MATCH
+
+MEMBER: commerce_engine.py
+SIZE: 9525
+STATUS: EXACT ROOT MATCH
+
+MEMBER: create_demo_datasets.py
+SIZE: 850
+STATUS: EXACT ROOT MATCH
+
+MEMBER: data_readiness.py
+SIZE: 2930
+STATUS: EXACT ROOT MATCH
+
+MEMBER: dependency_snapshot.py
+SIZE: 1385
+STATUS: EXACT ROOT MATCH
+
+MEMBER: deployment_audit.py
+SIZE: 4264
+STATUS: EXACT ROOT MATCH
+
+MEMBER: DESIGN_RELEASE_MANIFEST.json
+SIZE: 2432
+STATUS: EXACT ROOT MATCH
+
+MEMBER: design_system.py
+SIZE: 2302
+STATUS: EXACT ROOT MATCH
+
+MEMBER: executive_addons.py
+SIZE: 7486
+STATUS: EXACT ROOT MATCH
+
+MEMBER: executive_dashboard.py
+SIZE: 15925
+STATUS: EXACT ROOT MATCH
+
+MEMBER: executive_report.py
+SIZE: 6082
+STATUS: EXACT ROOT MATCH
+
+MEMBER: explorer_workspace.py
+SIZE: 8340
+STATUS: EXACT ROOT MATCH
+
+MEMBER: FILE_MANIFEST.json
+SIZE: 1712
+STATUS: EXACT ROOT MATCH
+
+MEMBER: FINAL_ACCEPTANCE_MANIFEST.json
+SIZE: 3322
+STATUS: EXACT ROOT MATCH
+
+MEMBER: final_financial_checks.py
+SIZE: 11227
+STATUS: EXACT ROOT MATCH
+
+MEMBER: final_reliability_checks.py
+SIZE: 5703
+STATUS: EXACT ROOT MATCH
+
+MEMBER: forecast_engine.py
+SIZE: 10026
+STATUS: EXACT ROOT MATCH
+
+MEMBER: forecast_panel.py
+SIZE: 8988
+STATUS: EXACT ROOT MATCH
+
+MEMBER: full_dataset_engine.py
+SIZE: 7266
+STATUS: EXACT ROOT MATCH
+
+MEMBER: home_experience.py
+SIZE: 4316
+STATUS: EXACT ROOT MATCH
+
+MEMBER: investment_engine.py
+SIZE: 10749
+STATUS: EXACT ROOT MATCH
+
+MEMBER: investment_workspace.py
+SIZE: 11690
+STATUS: EXACT ROOT MATCH
+
+MEMBER: local_file_guard.py
+SIZE: 3751
+STATUS: EXACT ROOT MATCH
+
+MEMBER: local_recovery_audit.py
+SIZE: 2016
+STATUS: EXACT ROOT MATCH
+
+MEMBER: local_review_cli.py
+SIZE: 2322
+STATUS: EXACT ROOT MATCH
+
+MEMBER: LOCAL_REVIEW_MANIFEST.json
+SIZE: 3185
+STATUS: EXACT ROOT MATCH
+
+MEMBER: local_workload_benchmark.py
+SIZE: 4517
+STATUS: EXACT ROOT MATCH
+
+MEMBER: MODEL_CARD_AND_LIMITATIONS.md
+SIZE: 2828
+STATUS: EXACT ROOT MATCH
+
+MEMBER: operations_ui.py
+SIZE: 1476
+STATUS: EXACT ROOT MATCH
+
+MEMBER: performance_insights.py
+SIZE: 4059
+STATUS: EXACT ROOT MATCH
+
+MEMBER: performance_lab.py
+SIZE: 2589
+STATUS: EXACT ROOT MATCH
+
+MEMBER: performance_results.json
+SIZE: 614
+STATUS: EXACT ROOT MATCH
+
+MEMBER: period_comparison.py
+SIZE: 8062
+STATUS: EXACT ROOT MATCH
+
+MEMBER: planning_workspace.py
+SIZE: 7828
+STATUS: EXACT ROOT MATCH
+
+MEMBER: portfolio_analytics.py
+SIZE: 4532
+STATUS: EXACT ROOT MATCH
+
+MEMBER: portfolio_panel.py
+SIZE: 3094
+STATUS: EXACT ROOT MATCH
+
+MEMBER: prepare_privacy.py
+SIZE: 1382
+STATUS: EXACT ROOT MATCH
+
+MEMBER: professor_review.py
+SIZE: 4338
+STATUS: EXACT ROOT MATCH
+
+MEMBER: PROJECT_AUDIT_AND_ROADMAP.md
+SIZE: 4981
+STATUS: EXACT ROOT MATCH
+
+MEMBER: quality_engine.py
+SIZE: 1406
+STATUS: EXACT ROOT MATCH
+
+MEMBER: README_INSTALL.md
+SIZE: 4804
+STATUS: EXACT ROOT MATCH
+
+MEMBER: README_INSTALL.txt
+SIZE: 5968
+STATUS: EXACT ROOT MATCH
+
+MEMBER: release_cli.py
+SIZE: 1519
+STATUS: EXACT ROOT MATCH
+
+MEMBER: release_evidence.py
+SIZE: 2535
+STATUS: EXACT ROOT MATCH
+
+MEMBER: report_bundle.py
+SIZE: 6316
+STATUS: EXACT ROOT MATCH
+
+MEMBER: report_engine.py
+SIZE: 13066
+STATUS: EXACT ROOT MATCH
+
+MEMBER: run_design_release_tests.py
+SIZE: 3155
+STATUS: EXACT ROOT MATCH
+
+MEMBER: run_enterprise_assurance.py
+SIZE: 2427
+STATUS: EXACT ROOT MATCH
+
+MEMBER: run_final_acceptance.py
+SIZE: 8997
+STATUS: EXACT ROOT MATCH
+
+MEMBER: run_final_gate_tests.py
+SIZE: 3110
+STATUS: EXACT ROOT MATCH
+
+MEMBER: run_local_review_tests.py
+SIZE: 3894
+STATUS: EXACT ROOT MATCH
+
+MEMBER: scalable_analytics.py
+SIZE: 9673
+STATUS: EXACT ROOT MATCH
+
+MEMBER: schema_aware_dashboard.py
+SIZE: 8353
+STATUS: EXACT ROOT MATCH
+
+MEMBER: sector_acceptance.py
+SIZE: 3918
+STATUS: EXACT ROOT MATCH
+
+MEMBER: sector_fixtures.py
+SIZE: 3163
+STATUS: EXACT ROOT MATCH
+
+MEMBER: start_local.py
+SIZE: 757
+STATUS: EXACT ROOT MATCH
+
+MEMBER: summarize_browser_timings.py
+SIZE: 922
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_assurance_contracts.py
+SIZE: 1329
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_assurance_performance.py
+SIZE: 835
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_assurance_reports.py
+SIZE: 1439
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_assurance_ui_mock.py
+SIZE: 1572
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_deployment_audit.py
+SIZE: 1281
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_design_integration.py
+SIZE: 1293
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_design_release_manifest.py
+SIZE: 189
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_design_system.py
+SIZE: 1128
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_explorer_ui_mock.py
+SIZE: 2654
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_final_evidence.py
+SIZE: 977
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_final_financial.py
+SIZE: 253
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_final_legacy.py
+SIZE: 1048
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_final_reliability.py
+SIZE: 232
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_final_ui_timing.py
+SIZE: 1237
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_investment_forecasting.py
+SIZE: 7770
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_investment_foundation.py
+SIZE: 6135
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_local_app_wiring.py
+SIZE: 914
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_local_file_guard.py
+SIZE: 1789
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_local_launcher.py
+SIZE: 584
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_local_recovery.py
+SIZE: 1127
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_local_release_manifest.py
+SIZE: 188
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_local_workload.py
+SIZE: 486
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_no_review_panel.py
+SIZE: 949
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_operations_ui_mock.py
+SIZE: 1190
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_phase3_batch2.py
+SIZE: 2143
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_phase3_batch34.py
+SIZE: 4180
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_phase3_batch56.py
+SIZE: 5333
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_phase3_batch78.py
+SIZE: 4473
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_phase3_batch910.py
+SIZE: 8199
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_phase3_batch1112.py
+SIZE: 9826
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_phase3_batch1314.py
+SIZE: 7919
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_phase45_acceptance.py
+SIZE: 722
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_professor_review.py
+SIZE: 955
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_release_evidence.py
+SIZE: 1181
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_scale_batch12.py
+SIZE: 4278
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_sector_acceptance.py
+SIZE: 409
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_setup.py
+SIZE: 145
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_synthetic_sector_data.py
+SIZE: 575
+STATUS: EXACT ROOT MATCH
+
+MEMBER: test_ui_integration_local.py
+SIZE: 1664
+STATUS: EXACT ROOT MATCH
+
+MEMBER: ui_runtime_metrics.py
+SIZE: 4346
+STATUS: EXACT ROOT MATCH
+
+MEMBER: verify_assurance_release.py
+SIZE: 1582
+STATUS: EXACT ROOT MATCH
+
+MEMBER: verify_design_release.py
+SIZE: 1958
+STATUS: EXACT ROOT MATCH
+
+MEMBER: verify_final_release.py
+SIZE: 1244
+STATUS: EXACT ROOT MATCH
+
+MEMBER: verify_local_release.py
+SIZE: 1494
+STATUS: EXACT ROOT MATCH
+
+MEMBER: verify_report_pack.py
+SIZE: 891
+STATUS: EXACT ROOT MATCH
+
+MEMBER: .streamlit/config.toml
+SIZE: 164
+STATUS: EXACT ROOT MATCH
+
+MEMBER: acceptance_artifacts/FAKE_PERFORMANCE_10000.csv
+SIZE: 1201592
+STATUS: EXACT ROOT MATCH
+
+MEMBER: acceptance_artifacts/FAKE_PERFORMANCE_100000.csv
+SIZE: 12081261
+STATUS: NOT BYTE-COMPARED
+
+MEMBER: acceptance_artifacts/FAKE_PERFORMANCE_500000.csv
+SIZE: 60427853
+STATUS: NOT BYTE-COMPARED
+
+MEMBER: acceptance_results/FINAL_ACCEPTANCE_EVIDENCE.zip
+SIZE: 13392
+STATUS: EXACT ROOT MATCH
+
+MEMBER: acceptance_results/FINAL_ACCEPTANCE_REPORT.html
+SIZE: 5344
+STATUS: EXACT ROOT MATCH
+
+MEMBER: acceptance_results/FINAL_ACCEPTANCE_REPORT.json
+SIZE: 11461
+STATUS: EXACT ROOT MATCH
+
+MEMBER: acceptance_results/FINAL_TEST_RESULTS.json
+SIZE: 3999
+STATUS: EXACT ROOT MATCH
+
+MEMBER: acceptance_results/ui_server_timings.jsonl
+SIZE: 21182
+STATUS: EXACT ROOT MATCH
+
+MEMBER: acceptance_results/UI_SERVER_TIMING_SUMMARY.json
+SIZE: 2068
+STATUS: EXACT ROOT MATCH
+
+MEMBER: assurance_results/enterprise_acceptance.json
+SIZE: 6413
+STATUS: EXACT ROOT MATCH
+
+MEMBER: assurance_results/enterprise_acceptance_pack.zip
+SIZE: 3649
+STATUS: EXACT ROOT MATCH
+
+MEMBER: assurance_results/performance_module_results.json
+SIZE: 796
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_batch56/bi_theme.css
+SIZE: 4458
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_batch56/executive_dashboard.py
+SIZE: 11241
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_batch56/planning_workspace.py
+SIZE: 6412
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_batch78/bi_theme.css
+SIZE: 4925
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_batch78/executive_dashboard.py
+SIZE: 13870
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_batch910/bi_theme.css
+SIZE: 5259
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_batch910/executive_dashboard.py
+SIZE: 14108
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_batch1112/app.py
+SIZE: 73881
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_batch1112/bi_theme.css
+SIZE: 5600
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_batch1112/executive_dashboard.py
+SIZE: 14575
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_batch1314/executive_dashboard.py
+SIZE: 15726
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_batch1314/executive_report.py
+SIZE: 4905
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_batch1314/test_phase3_batch1112.py
+SIZE: 9658
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_design_release/app.py
+SIZE: 63689
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_design_release/bi_theme.css
+SIZE: 10302
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_enterprise_assurance/app.py
+SIZE: 62765
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_enterprise_assurance/bi_theme.css
+SIZE: 9184
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_final_acceptance/app.py
+SIZE: 63939
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_final_acceptance/commerce_engine.py
+SIZE: 9089
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_investment_batch34/investment_workspace.py
+SIZE: 11436
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_investment_foundation/app.py
+SIZE: 72326
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_investment_foundation/home_experience.py
+SIZE: 4322
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_local_roadmap_release/app.py
+SIZE: 63553
+STATUS: EXACT ROOT MATCH
+
+MEMBER: backup_before_scale_batch12/app.py
+SIZE: 72622
+STATUS: EXACT ROOT MATCH
+
+SUMMARY
+Exact matches: 196
+Different contents: 0
+Not compared: 5

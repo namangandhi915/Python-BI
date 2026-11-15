@@ -1,0 +1,136 @@
+{
+  "project": "Python BI Studio",
+  "hosting": "PRIVATE_LOCAL_ONLY",
+  "professor_approval": "PENDING",
+  "project_phase_status": [
+    {
+      "phase": "1",
+      "area": "Corporate website foundation",
+      "status": "CORE_VERIFIED",
+      "note": "Final professor presentation review pending"
+    },
+    {
+      "phase": "2",
+      "area": "Dataset Library and persistence",
+      "status": "LOCALLY_VERIFIED",
+      "note": "Local single-user workflow"
+    },
+    {
+      "phase": "3",
+      "area": "Advanced Data Workspace",
+      "status": "VERIFIED",
+      "note": "14 development batches confirmed"
+    },
+    {
+      "phase": "4",
+      "area": "Executive dashboards and charts",
+      "status": "CORE_VERIFIED",
+      "note": "Additional multi-schema UI acceptance pending"
+    },
+    {
+      "phase": "5",
+      "area": "Business and commerce intelligence",
+      "status": "CORE_VERIFIED",
+      "note": "Accounting assumptions and real-sector validation pending"
+    },
+    {
+      "phase": "6",
+      "area": "Investment Intelligence",
+      "status": "RESEARCH_VERIFIED",
+      "note": "Scenarios and historical bootstrap; no guaranteed forecasts"
+    },
+    {
+      "phase": "7",
+      "area": "Reports and exports",
+      "status": "CORE_VERIFIED",
+      "note": "HTML, CSV, ZIP; final professor demo review pending"
+    },
+    {
+      "phase": "8",
+      "area": "Performance and final release",
+      "status": "LOCAL_TESTING",
+      "note": "500k upload/search confirmed; broader workloads & professor approval pending"
+    }
+  ],
+  "sector_checks": [
+    {
+      "sector": "Retail",
+      "rows": 120,
+      "gross_revenue_reconciled": true,
+      "net_revenue_reconciled": true,
+      "mapped_costs_reconciled": true,
+      "synthetic_net_profit_reconciled": true,
+      "category_reconciled": true,
+      "time_reconciled": true,
+      "charts_reconciled": true,
+      "report_generated": true,
+      "invalid_input_rejected": true,
+      "source_unchanged": true,
+      "status": "PASS"
+    },
+    {
+      "sector": "Services",
+      "rows": 120,
+      "gross_revenue_reconciled": true,
+      "net_revenue_reconciled": true,
+      "mapped_costs_reconciled": true,
+      "synthetic_net_profit_reconciled": true,
+      "category_reconciled": true,
+      "time_reconciled": true,
+      "charts_reconciled": true,
+      "report_generated": true,
+      "invalid_input_rejected": true,
+      "source_unchanged": true,
+      "status": "PASS"
+    },
+    {
+      "sector": "Manufacturing",
+      "rows": 120,
+      "gross_revenue_reconciled": true,
+      "net_revenue_reconciled": true,
+      "mapped_costs_reconciled": true,
+      "synthetic_net_profit_reconciled": true,
+      "category_reconciled": true,
+      "time_reconciled": true,
+      "charts_reconciled": true,
+      "report_generated": true,
+      "invalid_input_rejected": true,
+      "source_unchanged": true,
+      "status": "PASS"
+    }
+  ],
+  "dataset_library_audit": {
+    "scope": "local single-user only",
+    "dataset_library_present": true,
+    "active_metadata_present": true,
+    "saved_file_count": 3,
+    "active_integrity": "PASS",
+    "messages": []
+  },
+  "performance": {
+    "rows": 10000,
+    "columns": 14,
+    "source_memory_mib": 1.63,
+    "steps_sec": {
+      "source_generation_sec": 0.0634,
+      "full_dataset_search_sec": 0.0855,
+      "quality_scan_sec": 0.0196,
+      "dashboard_filter_sec": 0.0031,
+      "financial_calculations_sec": 0.0395,
+      "category_concentration_sec": 0.0343,
+      "chart_series_preparation_sec": 0.0861,
+      "executive_html_generation_sec": 0.1117,
+      "bounded_csv_export_sec": 0.0057
+    },
+    "all_module_reconciliations": true,
+    "includes_html_report_generation": true,
+    "includes_chart_series_but_not_browser_render": true,
+    "streamlit_full_ui_certified": false,
+    "scope": "Local synthetic full module-chain performance; NOT a Streamlit user-interface load test",
+    "status": "PASS"
+  },
+  "browser_review": "MANUAL \u2014 not automatically certified",
+  "public_deployment": "NOT_REQUESTED_NOT_AUTHORIZED",
+  "financial_assumptions": "Profit called net only when all expenses are explicitly mapped and user confirms completeness.",
+  "scope": "Does not expose original business data, workbook paths or transaction values"
+}

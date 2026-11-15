@@ -1,0 +1,20 @@
+DASHBOARD COMPONENT PROFILING
+
+         416111 function calls (394353 primitive calls) in 1.511 seconds
+
+   Ordered by: cumulative time
+   List reduced from 2737 to 10 due to restriction <'(executive_dashboard|chart_builder|executive_addons|executive_report|portfolio_panel|commerce_engine|business_metrics)\\.py'>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.059    0.059 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\executive_dashboard.py:26(render_executive_dashboard)
+        1    0.001    0.001    0.059    0.059 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\executive_addons.py:90(render_readiness_panel)
+        1    0.000    0.000    0.015    0.015 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\executive_addons.py:19(render_comparison_panel)
+        6    0.001    0.000    0.007    0.001 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\commerce_engine.py:10(_numeric)
+        1    0.000    0.000    0.005    0.005 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\executive_addons.py:13(_field_options)
+        1    0.000    0.000    0.004    0.004 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\business_metrics.py:52(revenue_by_period)
+        1    0.000    0.000    0.004    0.004 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\commerce_engine.py:24(calculate_commercial_metrics)
+        1    0.000    0.000    0.004    0.004 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\business_metrics.py:17(apply_dashboard_filters)
+       40    0.001    0.000    0.001    0.000 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\commerce_engine.py:15(<lambda>)
+        5    0.000    0.000    0.000    0.000 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\executive_dashboard.py:18(_default)
+
+

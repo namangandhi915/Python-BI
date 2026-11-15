@@ -1,0 +1,9 @@
+FINAL LARGE ARCHIVE VERIFICATION
+
+MATCH: benchmark_artifacts/synthetic_explorer_500000.csv
+MATCH: stored_datasets/a71cba02a6c2406092dd72df56689dc8.csv
+MATCH: stored_datasets/a7cc0bf0aaa04c79a6c419664c2f9a3d.csv
+MATCH: acceptance_artifacts/FAKE_PERFORMANCE_100000.csv
+MATCH: acceptance_artifacts/FAKE_PERFORMANCE_500000.csv
+
+VERIFIED MATCHES: 5/5

@@ -1,0 +1,30 @@
+DASHBOARD COMPONENT PROFILING
+
+         679717 function calls (644254 primitive calls) in 2.281 seconds
+
+   Ordered by: cumulative time
+   List reduced from 3105 to 20 due to restriction <'(executive_dashboard|chart_builder|executive_addons|executive_report|portfolio_panel|commerce_engine|business_metrics)\\.py'>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.141    0.141 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\executive_addons.py:90(render_readiness_panel)
+        1    0.000    0.000    0.065    0.065 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\chart_builder.py:31(_finish)
+        1    0.000    0.000    0.057    0.057 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\executive_addons.py:19(render_comparison_panel)
+        1    0.000    0.000    0.046    0.046 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\commerce_engine.py:24(calculate_commercial_metrics)
+        1    0.000    0.000    0.013    0.013 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\executive_dashboard.py:26(render_executive_dashboard)
+        1    0.000    0.000    0.013    0.013 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\portfolio_panel.py:10(render_portfolio_panel)
+        1    0.000    0.000    0.012    0.012 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\chart_builder.py:49(_aggregation)
+        1    0.000    0.000    0.011    0.011 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\chart_builder.py:65(render_chart_studio)
+        1    0.000    0.000    0.011    0.011 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\chart_builder.py:222(_download)
+        6    0.000    0.000    0.008    0.001 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\commerce_engine.py:10(_numeric)
+        1    0.000    0.000    0.008    0.008 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\chart_builder.py:43(_metrics)
+        1    0.000    0.000    0.005    0.005 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\business_metrics.py:52(revenue_by_period)
+        1    0.000    0.000    0.005    0.005 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\chart_builder.py:227(render_performance_lab)
+        1    0.000    0.000    0.003    0.003 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\executive_addons.py:13(_field_options)
+        1    0.000    0.000    0.003    0.003 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\business_metrics.py:17(apply_dashboard_filters)
+        1    0.000    0.000    0.001    0.001 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\executive_report.py:12(render_executive_report)
+       40    0.000    0.000    0.000    0.000 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\commerce_engine.py:15(<lambda>)
+        5    0.000    0.000    0.000    0.000 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\executive_dashboard.py:18(_default)
+        4    0.000    0.000    0.000    0.000 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\chart_builder.py:23(_choose_index)
+        1    0.000    0.000    0.000    0.000 C:\Users\Naman Gandhi\OneDrive\Desktop\Python BI\Python_BI_Studio_Verification\chart_builder.py:56(_notice)
+
+

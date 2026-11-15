@@ -1,0 +1,255 @@
+PYTHON BI STUDIO - COMPLETE NESTED INVENTORY
+Third-party environments and caches are excluded.
+
+
+FOLDER: .
+  .gitignore | 136 bytes
+  DESIGN_RELEASE_MANIFEST.json | 2432 bytes
+  FILE_MANIFEST.json | 1712 bytes
+  FINAL_ACCEPTANCE_MANIFEST.json | 3322 bytes
+  LOCAL_REVIEW_MANIFEST.json | 3185 bytes
+  MODEL_CARD_AND_LIMITATIONS.md | 2828 bytes
+  PROJECT_AUDIT_AND_ROADMAP.md | 4981 bytes
+  Python_BI_Studio_SOURCE_AUDIT.zip.zip | 26784543 bytes
+  README_INSTALL.md | 4804 bytes
+  README_INSTALL.txt | 5968 bytes
+  app.py | 64689 bytes
+  app_backup.py | 1267 bytes
+  app_backup_before_persistence.py | 44714 bytes
+  app_before_phase3_batch2.py.py | 68737 bytes
+  app_before_phase3_batch34.py.py | 70381 bytes
+  app_before_phase3_workspace.py.py | 73002 bytes
+  assurance_contracts.py | 4275 bytes
+  assurance_performance.py | 4595 bytes
+  assurance_phase45.py | 7904 bytes
+  assurance_project.py | 2834 bytes
+  assurance_reports.py | 3168 bytes
+  assurance_ui.py | 2553 bytes
+  audit_exports.py | 2707 bytes
+  benchmark_explorer.py | 4746 bytes
+  benchmark_phase3.py | 4438 bytes
+  bi_theme.css | 10861 bytes
+  build_acceptance_test_data.py | 1110 bytes
+  business_metrics.py | 5575 bytes
+  chart_builder.py | 13652 bytes
+  commerce_engine.py | 9525 bytes
+  create_demo_datasets.py | 850 bytes
+  data_readiness.py | 2930 bytes
+  dependency_snapshot.py | 1385 bytes
+  deployment_audit.py | 4264 bytes
+  design_system.py | 2302 bytes
+  executive_addons.py | 7486 bytes
+  executive_dashboard.py | 15925 bytes
+  executive_report.py | 6082 bytes
+  explorer_workspace.py | 8340 bytes
+  final_financial_checks.py | 11227 bytes
+  final_reliability_checks.py | 5703 bytes
+  forecast_engine.py | 10026 bytes
+  forecast_panel.py | 8988 bytes
+  full_dataset_engine.py | 7266 bytes
+  home_experience.py | 4316 bytes
+  investment_engine.py | 10749 bytes
+  investment_workspace.py | 11690 bytes
+  local_file_guard.py | 3751 bytes
+  local_recovery_audit.py | 2016 bytes
+  local_review_cli.py | 2322 bytes
+  local_workload_benchmark.py | 4517 bytes
+  operations_ui.py | 1476 bytes
+  performance_insights.py | 4059 bytes
+  performance_lab.py | 2589 bytes
+  performance_results.json | 614 bytes
+  period_comparison.py | 8062 bytes
+  planning_workspace.py | 7828 bytes
+  portfolio_analytics.py | 4532 bytes
+  portfolio_panel.py | 3094 bytes
+  prepare_privacy.py | 1382 bytes
+  professor_review.py | 4338 bytes
+  quality_engine.py | 1406 bytes
+  release_cli.py | 1519 bytes
+  release_evidence.py | 2535 bytes
+  report_bundle.py | 6316 bytes
+  report_engine.py | 13066 bytes
+  run_design_release_tests.py | 3155 bytes
+  run_enterprise_assurance.py | 2427 bytes
+  run_final_acceptance.py | 8997 bytes
+  run_final_gate_tests.py | 3110 bytes
+  run_local_review_tests.py | 3894 bytes
+  scalable_analytics.py | 9673 bytes
+  schema_aware_dashboard.py | 8353 bytes
+  sector_acceptance.py | 3918 bytes
+  sector_fixtures.py | 3163 bytes
+  start_local.py | 757 bytes
+  summarize_browser_timings.py | 922 bytes
+  test_assurance_contracts.py | 1329 bytes
+  test_assurance_performance.py | 835 bytes
+  test_assurance_reports.py | 1439 bytes
+  test_assurance_ui_mock.py | 1572 bytes
+  test_deployment_audit.py | 1281 bytes
+  test_design_integration.py | 1293 bytes
+  test_design_release_manifest.py | 189 bytes
+  test_design_system.py | 1128 bytes
+  test_explorer_ui_mock.py | 2654 bytes
+  test_final_evidence.py | 977 bytes
+  test_final_financial.py | 253 bytes
+  test_final_legacy.py | 1048 bytes
+  test_final_reliability.py | 232 bytes
+  test_final_ui_timing.py | 1237 bytes
+  test_investment_forecasting.py | 7770 bytes
+  test_investment_foundation.py | 6135 bytes
+  test_local_app_wiring.py | 914 bytes
+  test_local_file_guard.py | 1789 bytes
+  test_local_launcher.py | 584 bytes
+  test_local_recovery.py | 1127 bytes
+  test_local_release_manifest.py | 188 bytes
+  test_local_workload.py | 486 bytes
+  test_no_review_panel.py | 949 bytes
+  test_operations_ui_mock.py | 1190 bytes
+  test_phase3_batch1112.py | 9826 bytes
+  test_phase3_batch1314.py | 7919 bytes
+  test_phase3_batch2.py | 2143 bytes
+  test_phase3_batch34.py | 4180 bytes
+  test_phase3_batch56.py | 5333 bytes
+  test_phase3_batch78.py | 4473 bytes
+  test_phase3_batch910.py | 8199 bytes
+  test_phase45_acceptance.py | 722 bytes
+  test_professor_review.py | 955 bytes
+  test_release_evidence.py | 1181 bytes
+  test_scale_batch12.py | 4278 bytes
+  test_sector_acceptance.py | 409 bytes
+  test_setup.py | 145 bytes
+  test_synthetic_sector_data.py | 575 bytes
+  test_ui_integration_local.py | 1664 bytes
+  ui_runtime_metrics.py | 4346 bytes
+  verify_assurance_release.py | 1582 bytes
+  verify_design_release.py | 1958 bytes
+  verify_final_release.py | 1244 bytes
+  verify_local_release.py | 1494 bytes
+  verify_report_pack.py | 891 bytes
+
+FOLDER: .streamlit
+  config.toml | 164 bytes
+
+FOLDER: Data
+  Python_BI_Complete_Business_Dataset.xlsx | 12270 bytes
+
+FOLDER: acceptance_artifacts
+  FAKE_PERFORMANCE_10000.csv | 1201592 bytes
+  FAKE_PERFORMANCE_100000.csv | 12081261 bytes
+  FAKE_PERFORMANCE_500000.csv | 60427853 bytes
+
+FOLDER: acceptance_results
+  FINAL_ACCEPTANCE_EVIDENCE.zip | 13392 bytes
+  FINAL_ACCEPTANCE_REPORT.html | 5344 bytes
+  FINAL_ACCEPTANCE_REPORT.json | 11461 bytes
+  FINAL_TEST_RESULTS.json | 3999 bytes
+  UI_SERVER_TIMING_SUMMARY.json | 2068 bytes
+  ui_server_timings.jsonl | 21182 bytes
+
+FOLDER: assurance_results
+  enterprise_acceptance.json | 6413 bytes
+  enterprise_acceptance_pack.zip | 3649 bytes
+  performance_module_results.json | 796 bytes
+
+FOLDER: backup_before_batch1112
+  app.py | 73881 bytes
+  bi_theme.css | 5600 bytes
+  executive_dashboard.py | 14575 bytes
+
+FOLDER: backup_before_batch1314
+  executive_dashboard.py | 15726 bytes
+  executive_report.py | 4905 bytes
+  test_phase3_batch1112.py | 9658 bytes
+
+FOLDER: backup_before_batch56
+  bi_theme.css | 4458 bytes
+  executive_dashboard.py | 11241 bytes
+  planning_workspace.py | 6412 bytes
+
+FOLDER: backup_before_batch78
+  bi_theme.css | 4925 bytes
+  executive_dashboard.py | 13870 bytes
+
+FOLDER: backup_before_batch910
+  bi_theme.css | 5259 bytes
+  executive_dashboard.py | 14108 bytes
+
+FOLDER: backup_before_design_release
+  app.py | 63689 bytes
+  bi_theme.css | 10302 bytes
+
+FOLDER: backup_before_enterprise_assurance
+  app.py | 62765 bytes
+  bi_theme.css | 9184 bytes
+
+FOLDER: backup_before_final_acceptance
+  app.py | 63939 bytes
+  commerce_engine.py | 9089 bytes
+
+FOLDER: backup_before_investment_batch34
+  investment_workspace.py | 11436 bytes
+
+FOLDER: backup_before_investment_foundation
+  app.py | 72326 bytes
+  home_experience.py | 4322 bytes
+
+FOLDER: backup_before_local_roadmap_release
+  app.py | 63553 bytes
+
+FOLDER: backup_before_scale_batch12
+  app.py | 72622 bytes
+
+FOLDER: benchmark_artifacts
+  benchmark_500k.json | 603 bytes
+  synthetic_explorer_500000.csv | 60427853 bytes
+
+FOLDER: demo_artifacts
+  FAKE_manufacturing_120.csv | 8323 bytes
+  FAKE_retail_120.csv | 8016 bytes
+  FAKE_services_120.csv | 8032 bytes
+
+FOLDER: docs
+  05_GATE_BROWSER_CHECKLIST.md | 6449 bytes
+  ACCEPTANCE_MATRIX.md | 2754 bytes
+  ACCOUNTING_ASSUMPTIONS.md | 2102 bytes
+  DEPLOYMENT_SECURITY_GATES.md | 2730 bytes
+  DESIGN_SYSTEM.md | 2260 bytes
+  FINAL_MANUAL_ACCEPTANCE.md | 1744 bytes
+  LOCAL_DATA_SAFETY_AND_LIMITS.md | 1849 bytes
+  LOCAL_RESTART_AND_BACKUP.md | 1845 bytes
+  OPERATIONS_RUNBOOK.md | 1496 bytes
+  PHASES_AND_ACCEPTANCE.md | 1706 bytes
+  PROFESSOR_DEMONSTRATION_GUIDE.md | 2362 bytes
+  PROFESSOR_FEEDBACK_TEMPLATE.md | 811 bytes
+  PROJECT_EFFORT_LOG.md | 841 bytes
+  RELEASE_ACCEPTANCE.md | 2328 bytes
+  RELEASE_CHANGELOG.md | 1340 bytes
+  RELEASE_NOTES.md | 1714 bytes
+  ROADMAP_FINAL_STATUS.md | 1744 bytes
+  ROLLBACK_AND_RESTART.md | 787 bytes
+  SECURITY_AND_LIMITATIONS.md | 1730 bytes
+
+FOLDER: professor_results
+  LOCAL_ACADEMIC_READINESS.json | 4423 bytes
+  LOCAL_TEST_RESULTS.json | 3566 bytes
+  PROFESSOR_REVIEW_PACKET.zip | 2593 bytes
+  workload_500k.json | 761 bytes
+
+FOLDER: release_results
+  regression_tests.json | 2673 bytes
+  release_readiness.html | 2783 bytes
+  release_readiness.json | 3069 bytes
+  release_readiness_pack.zip | 2877 bytes
+
+FOLDER: samples
+  synthetic_market_prices_TEST_ONLY.csv | 1801 bytes
+
+FOLDER: stored_datasets
+  018f15219caf428a87c0d634376e32be.xlsx | 7095 bytes
+  32ae9a3177954d65bcd481c8d2bf6c64.csv | 8016 bytes
+  620d7c8dde0546e0bea2525075758337.xlsx | 12270 bytes
+  a71cba02a6c2406092dd72df56689dc8.csv | 12081261 bytes
+  a7cc0bf0aaa04c79a6c419664c2f9a3d.csv | 60427853 bytes
+  active_dataset.json | 182 bytes
+  bd83428befb645a384d955bbf15eab76.csv | 8323 bytes
+  dataset_labels.json | 91 bytes
+  df8ea7564d354114875a132e5e87a5ee.csv | 1201592 bytes

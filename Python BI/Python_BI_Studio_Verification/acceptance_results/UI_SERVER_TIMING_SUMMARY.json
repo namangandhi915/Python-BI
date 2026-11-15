@@ -1,0 +1,80 @@
+{
+  "measurement": "Server-side selected render functions only, not complete browser latency",
+  "samples": 67,
+  "errors": 0,
+  "pages": [
+    {
+      "page": "Commercial Intelligence",
+      "observations": 7,
+      "max_rows_observed": 100000,
+      "median_server_seconds": 0.0574,
+      "max_server_seconds": 1.9086,
+      "last_rss_mib": null,
+      "errors": 0
+    },
+    {
+      "page": "Executive Dashboard",
+      "observations": 14,
+      "max_rows_observed": 500000,
+      "median_server_seconds": 2.4447,
+      "max_server_seconds": 7.6916,
+      "last_rss_mib": null,
+      "errors": 0
+    },
+    {
+      "page": "Explorer",
+      "observations": 17,
+      "max_rows_observed": 500000,
+      "median_server_seconds": 0.2317,
+      "max_server_seconds": 2.1263,
+      "last_rss_mib": null,
+      "errors": 0
+    },
+    {
+      "page": "Home",
+      "observations": 4,
+      "max_rows_observed": 0,
+      "median_server_seconds": 0.0073,
+      "max_server_seconds": 0.0118,
+      "last_rss_mib": null,
+      "errors": 0
+    },
+    {
+      "page": "Home assurance",
+      "observations": 4,
+      "max_rows_observed": 120,
+      "median_server_seconds": 0.0466,
+      "max_server_seconds": 0.087,
+      "last_rss_mib": null,
+      "errors": 0
+    },
+    {
+      "page": "Home readiness",
+      "observations": 4,
+      "max_rows_observed": 0,
+      "median_server_seconds": 0.0334,
+      "max_server_seconds": 0.0605,
+      "last_rss_mib": null,
+      "errors": 0
+    },
+    {
+      "page": "Investment Intelligence",
+      "observations": 8,
+      "max_rows_observed": 500000,
+      "median_server_seconds": 0.0604,
+      "max_server_seconds": 1.2292,
+      "last_rss_mib": null,
+      "errors": 0
+    },
+    {
+      "page": "Legacy compatible view",
+      "observations": 9,
+      "max_rows_observed": 500000,
+      "median_server_seconds": 0.0416,
+      "max_server_seconds": 0.1687,
+      "last_rss_mib": null,
+      "errors": 0
+    }
+  ],
+  "browser_acceptance": "MANUAL"
+}

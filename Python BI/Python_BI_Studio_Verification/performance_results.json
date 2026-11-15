@@ -1,0 +1,22 @@
+{
+  "scope": "Isolated local synthetic Pandas operations only; NOT Streamlit upload/UI benchmark",
+  "generated_utc": "2026-11-07T13:01:09+00:00",
+  "source": "Deterministic synthetic data; no user dataset read or uploaded",
+  "rows": 500000,
+  "columns": 5,
+  "selected_rows": 52175,
+  "group_count": 100,
+  "dataframe_memory_mib": 9.062,
+  "timings_seconds": {
+    "generate": 0.032004,
+    "filter": 0.017331,
+    "group": 0.009726,
+    "bounded_csv": 0.003631
+  },
+  "reconciled": true,
+  "csv_preview_bytes": 3034,
+  "environment": {
+    "python": "3.13.16",
+    "pandas": "3.0.6"
+  }
+}

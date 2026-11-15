@@ -1,0 +1,64 @@
+PYTHON BI STUDIO - DEPENDENCY AUDIT
+
+PYTHON VERSION: 3.13.16
+VIRTUAL ENVIRONMENT ACTIVE: True
+
+THIRD-PARTY IMPORTS AND PACKAGES
+numpy: numpy==2.5.4
+openpyxl: openpyxl==3.1.5
+pandas: pandas==3.0.6
+plotly: plotly==7.1.0
+psutil: DISTRIBUTION UNRESOLVED
+streamlit: streamlit==1.66.0
+
+PYTHON SOURCE SYNTAX ISSUES
+NONE
+
+PIP DEPENDENCY CHECK
+EXIT CODE: 0
+No broken requirements found.
+
+
+
+EVIDENCE ARCHIVE COMPARISON
+
+ARCHIVE: acceptance_results/FINAL_ACCEPTANCE_EVIDENCE.zip
+FINAL_ACCEPTANCE_REPORT.json: MATCH vs acceptance_results\FINAL_ACCEPTANCE_REPORT.json
+FINAL_ACCEPTANCE_REPORT.html: MATCH vs acceptance_results\FINAL_ACCEPTANCE_REPORT.html
+docs/05_GATE_BROWSER_CHECKLIST.md: MATCH vs docs\05_GATE_BROWSER_CHECKLIST.md
+docs/ACCOUNTING_ASSUMPTIONS.md: MATCH vs docs\ACCOUNTING_ASSUMPTIONS.md
+docs/ROADMAP_FINAL_STATUS.md: MATCH vs docs\ROADMAP_FINAL_STATUS.md
+docs/LOCAL_RESTART_AND_BACKUP.md: MATCH vs docs\LOCAL_RESTART_AND_BACKUP.md
+FINAL_TEST_RESULTS.json: MATCH vs acceptance_results\FINAL_TEST_RESULTS.json
+UI_SERVER_TIMING_SUMMARY.json: MATCH vs acceptance_results\UI_SERVER_TIMING_SUMMARY.json
+
+ARCHIVE: assurance_results/enterprise_acceptance_pack.zip
+acceptance_summary.json: NO STANDALONE COPY
+acceptance_summary.html: NO STANDALONE COPY
+README.txt: NO STANDALONE COPY
+
+ARCHIVE: professor_results/PROFESSOR_REVIEW_PACKET.zip
+PROJECT_STATUS.json: NO STANDALONE COPY
+PROFESSOR_REVIEW.html: NO STANDALONE COPY
+VERIFICATION_CHECKLIST.csv: NO STANDALONE COPY
+README.txt: NO STANDALONE COPY
+
+PROFESSOR CHECKLIST CONTENTS
+['Review item', 'Initial status', 'Observed result', 'Professor comments']
+['Home page and corporate light design', 'MANUAL', '', '']
+['Original Dataset Library restore / switching', 'MANUAL', '', '']
+['Full-dataset search with original/synthetic files', 'MANUAL', '', '']
+['Prepare & Validate, missing-value finder', 'MANUAL', '', '']
+['Commercial financial mapping and accounting assumptions', 'MANUAL', '', '']
+['Executive Dashboard, filters, Chart Studio', 'MANUAL', '', '']
+['Professional report HTML/CSV/ZIP and reconciliations', 'MANUAL', '', '']
+['Business investment NPV/IRR/scenarios', 'MANUAL', '', '']
+['Market historical research, simulation/backtest limitations', 'MANUAL', '', '']
+['Large-row workload and memory responsiveness', 'MANUAL', '', '']
+['Local-only access; no public URL', 'MANUAL', '', '']
+['Professor assessment, comments and approval', 'AWAITING_PROFESSOR', '', '']
+
+ARCHIVE: release_results/release_readiness_pack.zip
+release_readiness.json: DIFFERENT vs release_results\release_readiness.json
+release_readiness.html: MATCH vs release_results\release_readiness.html
+README.txt: NO STANDALONE COPY

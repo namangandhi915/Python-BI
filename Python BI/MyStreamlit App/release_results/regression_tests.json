@@ -1,0 +1,124 @@
+{
+  "timestamp_utc": "2026-11-09T11:21:35+00:00",
+  "scope": "Local automated syntax/calculation/integration checks; browser and security gates remain manual",
+  "mode": "full",
+  "results": [
+    {
+      "name": "test_design_system.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_deployment_audit.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_release_evidence.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_operations_ui_mock.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_design_integration.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_design_release_manifest.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_assurance_contracts.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_phase45_acceptance.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_assurance_reports.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_assurance_performance.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_assurance_ui_mock.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_scale_batch12.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_explorer_ui_mock.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_investment_foundation.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_investment_forecasting.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_ui_integration_local.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_phase3_batch2.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_phase3_batch34.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_phase3_batch56.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_phase3_batch78.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_phase3_batch910.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_phase3_batch1112.py",
+      "status": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "test_phase3_batch1314.py",
+      "status": "PASS",
+      "exit_code": 0
+    }
+  ],
+  "passed": 23,
+  "failed": 0
+}
