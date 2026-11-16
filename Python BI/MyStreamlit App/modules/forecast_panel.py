@@ -59,6 +59,7 @@ def render_business_stress_test(
             st.warning(f"The scenario cannot be calculated: {exc}")
 
 
+@st.fragment
 def render_market_research(history: pd.DataFrame, frequency: str, cadence_ok: bool) -> None:
     with st.expander("Forecasting research — historical bootstrap and backtest", expanded=False):
         st.warning(

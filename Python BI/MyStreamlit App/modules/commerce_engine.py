@@ -40,6 +40,7 @@ def calculate_commercial_metrics(
     invested_capital: str | None = None,
     complete_costs: bool = False,
     capital_is_row_additive: bool = False,
+    revenue_basis: str = "gross",
 ) -> tuple[pd.DataFrame, dict]:
     """Returns row-level audit and totals. All monetary fields must be same currency.
 
@@ -49,6 +50,10 @@ def calculate_commercial_metrics(
     """
     if revenue not in data.columns:
         raise ValueError("Choose a valid revenue column.")
+    if revenue_basis not in ("gross", "net"):
+        raise ValueError("Choose a gross or net revenue basis.")
+    if revenue_basis == "net" and any(v and v != NONE for v in (discount, returns)):
+        raise ValueError("Do not deduct discounts or returns again from already-net revenue.")
     if not data.columns.is_unique:
         raise ValueError("Duplicate source column names prevent reliable financial mapping.")
     if (not cost or cost == NONE) and any(field and field != NONE for field in (operating_expenses, taxes)):
@@ -59,10 +64,12 @@ def calculate_commercial_metrics(
     if len(columns) != len(set(columns)):
         raise ValueError("One column is mapped to multiple financial roles. Choose distinct fields.")
     output = pd.DataFrame(index=data.index)
-    output["Gross Revenue"] = _numeric(data, revenue)
+    revenue_values = _numeric(data, revenue)
+    if revenue_basis == "gross":
+        output["Gross Revenue"] = revenue_values
     output["Discounts"] = _numeric(data, discount)
     output["Returns"] = _numeric(data, returns)
-    output["Net Revenue"] = output["Gross Revenue"] - output["Discounts"] - output["Returns"]
+    output["Net Revenue"] = revenue_values - output["Discounts"] - output["Returns"]
     has_cost = bool(cost and cost != NONE)
     if has_cost:
         output["Mapped Costs"] = (
@@ -72,11 +79,12 @@ def calculate_commercial_metrics(
         output["Loss After Mapped Costs"] = (-output["Profit After Mapped Costs"]).clip(lower=0)
     totals = {
         "records": len(data),
-        "gross_revenue": float(output["Gross Revenue"].sum()),
         "total_discounts": float(output["Discounts"].sum()),
         "total_returns": float(output["Returns"].sum()),
         "net_revenue": float(output["Net Revenue"].sum()),
     }
+    if revenue_basis == "gross":
+        totals["gross_revenue"] = float(output["Gross Revenue"].sum())
     if has_cost:
         profit = float(output["Profit After Mapped Costs"].sum())
         totals.update({
@@ -98,7 +106,7 @@ def calculate_commercial_metrics(
 
 
 def _field_selector(label: str, fields: list[str], key: str, keywords: list[str], required=False) -> str:
-    options = fields if required else [NONE] + fields
+    options = [NONE] + fields
     default = 0
     for i, field in enumerate(options):
         if field == NONE:
@@ -133,9 +141,16 @@ def render_commercial_intelligence(data: pd.DataFrame) -> None:
         left, right = st.columns(2)
         with left:
             revenue = _field_selector("Revenue (required)", fields, "ci_revenue", ["sales", "revenue", "gross revenue"], True)
+            net_named = revenue != NONE and "net" in str(revenue).lower().replace("_", " ").split()
+            basis_key = f"ci_revenue_basis_{scope}_{revenue}"
+            basis = st.radio("Revenue basis", ["Gross (before discounts and returns)", "Net (already adjusted)"], index=1 if net_named else 0, key=basis_key, horizontal=True)
             cost = _field_selector("Cost of sales", fields, "ci_cost", ["total cost", "cost", "cogs"])
-            discount = _field_selector("Discounts (optional)", fields, "ci_discount", ["discounts", "discount amount"])
-            returns = _field_selector("Returns / refunds (optional)", fields, "ci_returns", ["returns", "refunds"])
+            if basis.startswith("Net"):
+                discount = returns = NONE
+                st.caption("Discounts and returns are already included in net revenue and will not be deducted again.")
+            else:
+                discount = _field_selector("Discounts (optional)", fields, "ci_discount", ["discounts", "discount amount"])
+                returns = _field_selector("Returns / refunds (optional)", fields, "ci_returns", ["returns", "refunds"])
         with right:
             operating = _field_selector("Operating expenses (optional)", fields, "ci_opex", ["operating expenses", "opex"])
             taxes = _field_selector("Taxes (optional)", fields, "ci_taxes", ["taxes", "tax expense"])
@@ -148,12 +163,17 @@ def render_commercial_intelligence(data: pd.DataFrame) -> None:
             "I confirm invested capital is an independent, additive amount in each row (not a repeated account balance)",
             key="ci_capital_additive"
         ) if capital != NONE else False
-        st.info("Use revenue BEFORE mapped discounts/returns. Do not map overlapping columns, or add deductions already included in Sales.")
+        st.info("Choose whether revenue is gross or already net. Do not map overlapping columns or deduct adjustments twice.")
+
+    if revenue == NONE:
+        st.session_state.pop("commercial_mapping", None)
+        st.info("Select a revenue field to calculate commercial metrics; no unrelated numeric field is selected automatically.")
+        return
 
     try:
         calculated, m = calculate_commercial_metrics(
             data, revenue, cost, discount, returns, operating, taxes, capital,
-            complete, capital_additive
+            complete, capital_additive, revenue_basis="net" if basis.startswith("Net") else "gross"
         )
     except (ValueError, TypeError, OverflowError) as exc:
         if saved.get("scope") == scope:
@@ -161,9 +181,10 @@ def render_commercial_intelligence(data: pd.DataFrame) -> None:
         st.error(str(exc))
         return
 
-    st.session_state["commercial_mapping"] = {"scope": scope, "revenue": revenue, "cost": cost, "discount": discount, "returns": returns, "operating": operating, "taxes": taxes, "capital": capital}
+    is_net = basis.startswith("Net")
+    st.session_state["commercial_mapping"] = {"scope": scope, "revenue": revenue, "basis": "net" if is_net else "gross", "cost": cost, "discount": discount, "returns": returns, "operating": operating, "taxes": taxes, "capital": capital}
     left, right = st.columns(2)
-    left.metric("Gross Revenue", f"{m['gross_revenue']:,.2f}")
+    left.metric("Gross Revenue", "Not provided" if is_net else f"{m['gross_revenue']:,.2f}")
     right.metric("Net Revenue", f"{m['net_revenue']:,.2f}")
     if "mapped_costs" not in m:
         st.warning("Choose a cost-of-sales column to calculate profit, loss and margin.")
@@ -197,7 +218,7 @@ def render_commercial_intelligence(data: pd.DataFrame) -> None:
 
     with st.expander("Calculation notes and interpretation"):
         st.markdown("""
-- Net revenue = gross revenue − separately mapped discounts − returns.
+- Net revenue is the mapped net amount, or gross revenue minus separately mapped discounts and returns.
 - Profit after mapped costs = net revenue − cost of sales − mapped operating expenses − mapped taxes.
 - Net business loss = max(negative aggregate profit, 0). Row-level loss totals are reported separately.
 - Net profit is shown only when users confirm all relevant costs and taxes are included.

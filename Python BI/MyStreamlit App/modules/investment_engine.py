@@ -11,6 +11,7 @@ from collections.abc import Sequence
 from math import isfinite, sqrt
 
 import pandas as pd
+import numpy as np
 
 
 FREQUENCY_PERIODS = {"Daily": 252, "Weekly": 52, "Monthly": 12, "Quarterly": 4, "Yearly": 1}
@@ -157,6 +158,7 @@ def evaluate_market_history(
     price_col: str,
     frequency: str = "Daily",
     annual_risk_free_pct: float = 0.0,
+    aggregate_periods: bool = False,
 ) -> tuple[dict, pd.DataFrame]:
     """Descriptive *price-only* risk/return analysis on an uploaded series.
 
@@ -178,7 +180,7 @@ def evaluate_market_history(
     dates = pd.to_datetime(data[date_col], errors="coerce", format="mixed", utc=True)
     prices = pd.to_numeric(data[price_col], errors="coerce")
     bad_date = dates.isna()
-    bad_price = prices.isna() | ~prices.map(lambda x: bool(pd.notna(x)) and isfinite(float(x))) | (prices <= 0)
+    bad_price = prices.isna() | ~np.isfinite(prices.to_numpy(dtype=float, na_value=np.nan)) | (prices <= 0)
     if bad_date.any() or bad_price.any():
         raise ValueError(
             f"Invalid rows: {int(bad_date.sum())} with missing/unparseable dates and "
@@ -190,8 +192,14 @@ def evaluate_market_history(
 
     series = pd.DataFrame({"Date": dates, "Price": prices.astype(float)}, index=data.index)
     series = series.sort_values("Date").reset_index(drop=True)
+    if aggregate_periods:
+        if frequency not in ("Quarterly", "Yearly"):
+            raise ValueError("Period aggregation is available for quarterly and yearly analysis.")
+        # Keep the actual timestamp of the final observation, including incomplete periods.
+        period = series["Date"].dt.tz_localize(None).dt.to_period("Q" if frequency == "Quarterly" else "Y")
+        series = series.groupby(period, sort=True).tail(1).reset_index(drop=True)
     if len(series) < 2:
-        raise ValueError("At least two distinct dated price records are required.")
+        raise ValueError("At least two distinct dated price periods are required for this frequency.")
     gaps = series["Date"].diff().dt.total_seconds().iloc[1:] / 86400.0
     median_gap = float(gaps.median())
     acceptable = {

@@ -113,7 +113,9 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
 
     mapping = st.session_state.get("commercial_mapping", {})
     scope = mapping_scope(data, str(st.session_state.get("active_data_token", dataset_name)))
-    if mapping.get("scope") == scope:
+    revenue_basis = "gross"
+    if mapping.get("scope") == scope and mapping.get("basis") in ("gross", "net"):
+        revenue_basis = mapping.get("basis", "gross")
         revenue_col = mapping["revenue"]
         cost_col = mapping["cost"]
         discount_col = mapping["discount"]
@@ -133,7 +135,7 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
 
     try:
         calculations, totals = calculate_commercial_metrics(
-            filtered, revenue_col, cost_col, discount_col, returns_col, operating_col, taxes_col
+            filtered, revenue_col, cost_col, discount_col, returns_col, operating_col, taxes_col, revenue_basis=revenue_basis
         )
     except (ValueError, TypeError, OverflowError) as error:
         st.error(f"Financial calculation blocked: {error}")
@@ -141,7 +143,7 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
 
     headline = st.columns(4)
     headline[0].metric("Matching Records", f"{len(filtered):,}")
-    headline[1].metric("Gross Revenue", f"{totals['gross_revenue']:,.2f}")
+    headline[1].metric("Gross Revenue", f"{totals['gross_revenue']:,.2f}" if "gross_revenue" in totals else "Not provided")
     headline[2].metric("Net Revenue", f"{totals['net_revenue']:,.2f}")
     if "profit_after_mapped_costs" in totals:
         headline[3].metric("Profit after mapped costs", f"{totals['profit_after_mapped_costs']:,.2f}")
@@ -272,7 +274,7 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
                                        (" (additional values omitted from label)" if len(selected) > 20 else ""))
     if start is not None:
         filter_descriptions.append(f"Dates {start} through {end} in {date_col}")
-    mapping = {"Gross revenue": revenue_col, "Cost of sales": cost_col,
+    mapping = {"Net revenue" if revenue_basis == "net" else "Gross revenue": revenue_col, "Cost of sales": cost_col,
                "Discounts": discount_col, "Returns": returns_col,
                "Operating expenses": operating_col, "Taxes": taxes_col}
     render_executive_report(

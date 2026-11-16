@@ -133,16 +133,18 @@ def _market_workspace() -> None:
     date_col = c1.selectbox("Date field", colnames, index=default_date, key="ii_market_date")
     price_col = c2.selectbox("Price field", colnames, index=default_price, key="ii_market_price")
     freq = c3.selectbox("Observation frequency", ["Daily", "Weekly", "Monthly", "Quarterly", "Yearly"], key="ii_market_frequency")
-    st.caption("Select the frequency already present in the uploaded observations; the app does not resample daily data into quarterly or yearly prices.")
+    st.caption("Quarterly and yearly analysis uses the last available price in each calendar period, including an incomplete latest period. Daily, weekly and monthly use the uploaded observations as provided.")
     rf = st.number_input("Assumed annual risk-free rate (%)", min_value=-50.0, max_value=100.0, value=0.0, step=0.25, key="ii_market_rf")
     try:
-        analysis_key = (upload_info["sha256"], date_col, price_col, freq, rf)
+        analysis_key = (upload_info["sha256"], date_col, price_col, freq, rf, "period-end-v1")
         analysis = st.session_state.get("ii_market_analysis")
         if analysis is None or analysis[0] != analysis_key:
-            summary, history = evaluate_market_history(data, date_col, price_col, freq, rf)
+            summary, history = evaluate_market_history(data, date_col, price_col, freq, rf, aggregate_periods=freq in ("Quarterly", "Yearly"))
             analysis = (analysis_key, summary, history)
             st.session_state["ii_market_analysis"] = analysis
         _, summary, history = analysis
+        if freq in ("Quarterly", "Yearly"):
+            st.caption(f"{len(data):,} source rows grouped into {len(history):,} {freq.lower()} period-end observations.")
     except (ValueError, TypeError, OverflowError) as exc:
         st.error(str(exc))
         return

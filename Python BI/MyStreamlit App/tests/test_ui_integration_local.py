@@ -10,6 +10,7 @@ class FakeSt:
     clicked = True
     downloads = []
     outputs = []
+    def fragment(self, fn): return fn
     def expander(self,*a,**kw): return nullcontext()
     def columns(self,n,*a,**kw): return [self for _ in range(n)]
     def number_input(self,label,*a,**kwargs): return kwargs.get('value',0)

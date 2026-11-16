@@ -113,9 +113,11 @@ def build_executive_report(
         raise ValueError("The category field is missing from the filtered data.")
     if date_column is not None and date_column not in source.columns:
         raise ValueError("The date field is missing from the filtered data.")
-    for key in ("gross_revenue", "net_revenue"):
+    for key in ("net_revenue",):
         if key not in totals:
             raise ValueError(f"Required financial total is missing: {key}.")
+    if ("Gross Revenue" in calculations.columns) != ("gross_revenue" in totals):
+        raise ValueError("Gross revenue rows and total must either both be present or both be unavailable.")
     for column, key in (("Gross Revenue", "gross_revenue"), ("Net Revenue", "net_revenue"),
                         ("Mapped Costs", "mapped_costs"), ("Profit After Mapped Costs", "profit_after_mapped_costs")):
         if column in calculations.columns:
@@ -127,7 +129,7 @@ def build_executive_report(
     has_cost = "Profit After Mapped Costs" in calculations.columns
     summary_rows = [
         ("Matching transactions", len(source)),
-        ("Gross Revenue", _finite(totals["gross_revenue"])),
+        ("Gross Revenue", _finite(totals["gross_revenue"]) if "gross_revenue" in totals else None),
         ("Net Revenue", _finite(totals["net_revenue"])),
         ("Mapped Costs", _finite(totals["mapped_costs"]) if has_cost else None),
         ("Profit After Mapped Costs", _finite(totals["profit_after_mapped_costs"]) if has_cost else None),
@@ -178,7 +180,7 @@ def build_executive_report(
         for label, value in field_mapping.items()
     )
     note_html = "".join(f"<li>{_e(item)}</li>" for item in notes)
-    kpis = [("Gross Revenue", _fmt(totals["gross_revenue"])),
+    kpis = [("Gross Revenue", _fmt(totals["gross_revenue"]) if "gross_revenue" in totals else "Not provided"),
             ("Net Revenue", _fmt(totals["net_revenue"]))]
     if has_cost:
         kpis += [("Mapped Costs", _fmt(totals["mapped_costs"])),
