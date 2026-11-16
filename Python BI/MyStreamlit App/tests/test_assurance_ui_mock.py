@@ -5,7 +5,7 @@ import pandas as pd
 import assurance_ui
 
 class Fake:
-    def __init__(self): self.calls=[]
+    def __init__(self): self.calls=[]; self.session_state={}
     def expander(self,*a,**k):self.calls.append('expander');return nullcontext()
     def caption(self,*a,**k):self.calls.append('caption')
     def info(self,*a,**k):self.calls.append('info')

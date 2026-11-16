@@ -63,11 +63,13 @@ def _notice(meta: dict) -> None:
 
 
 def render_chart_studio(filtered: pd.DataFrame, calculations: pd.DataFrame) -> None:
-    with st.expander("07  ·  Interactive chart studio", expanded=False):
+    with st.expander("05  ·  Interactive chart studio", expanded=False):
         st.caption(
             "Change chart type, measures and dimensions here—without switching to the legacy Dashboard. "
             "The chart uses exactly the Executive Dashboard filters and mapped financial calculations."
         )
+        if not st.checkbox("Build interactive chart", key="studio_run"):
+            return
         try:
             measures, default_index = _metrics(filtered, calculations)
         except ValueError as exc:
@@ -178,7 +180,7 @@ def render_chart_studio(filtered: pd.DataFrame, calculations: pd.DataFrame) -> N
                 y_metric = st.selectbox("Y-axis measure", measures,
                                         index=min(default_index + 1, len(measures) - 1),
                                         key="studio_scatter_y")
-            size = st.select_slider("Maximum plotted points", [100, 500, 1_000, 2_500, 5_000],
+            size = st.select_slider("Maximum plotted points", [100, 500, 1_000, 2_500, 5_000, 10_000, 100_000, 500_000, 1_000_000],
                                     value=1_000, key="studio_scatter_limit")
             try:
                 chart, meta = scatter_chart_data(filtered, calculations, metric, y_metric, size)

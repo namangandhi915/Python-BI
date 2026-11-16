@@ -15,7 +15,11 @@ def render_assurance_home(active: pd.DataFrame | None) -> None:
         if active.columns.empty:
             st.warning('The source has no columns.')
             return
-        limit = st.selectbox('Quality diagnostic sample size', [100, 500, 2000, 5000, 10000], index=2, key='assurance_sample_rows')
+        preview_options = [10, 20, 50, 100, 500, 1000, 10000, 100000, 500000, 1000000]
+        current_preview = st.session_state.get('explorer_preview_setting', 100)
+        chosen_preview = st.selectbox('Maximum Explorer preview rows', preview_options, index=preview_options.index(current_preview), key='explorer_preview_widget', help='Large previews can slow your browser.')
+        st.session_state['explorer_preview_setting'] = chosen_preview
+        limit = st.selectbox('Quality diagnostic sample size', [100, 500, 2000, 5000, 10000, 100000, 500000, 1000000], index=2, key='assurance_sample_rows')
         exact = st.checkbox('Run exact missing-value and duplicate counts on the entire active source (optional)',
                             value=False, key='assurance_exact_source_scan')
         try:
@@ -36,5 +40,3 @@ def render_assurance_home(active: pd.DataFrame | None) -> None:
         st.download_button('Download data-quality summary (no source row values)',
                            data=excel_safe_csv(profile),file_name='python_bi_assurance_profile.csv',
                            mime='text/csv', key='assurance_profile_export')
-        st.caption('Formal Phase 4/5 acceptance reports can be generated with scripts/run_enterprise_assurance.py in VS Code. '
-                   'Manual/browser review remains necessary.')

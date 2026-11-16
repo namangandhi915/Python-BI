@@ -10,7 +10,7 @@ import hashlib
 import re
 import zipfile
 
-MAX_UPLOAD_MIB = 96
+MAX_UPLOAD_MIB = 256
 MAX_ARCHIVE_MIB = 512
 MAX_ARCHIVE_ENTRIES = 20_000
 _STORED = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}\.(csv|xlsx)$", re.I)

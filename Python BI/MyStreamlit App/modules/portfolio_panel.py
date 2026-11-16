@@ -8,7 +8,7 @@ from portfolio_analytics import build_category_concentration
 
 
 def render_portfolio_panel(source: pd.DataFrame, calculations: pd.DataFrame, totals: dict) -> None:
-    with st.expander("10  ·  Revenue concentration and category mix", expanded=False):
+    with st.expander("07  ·  Revenue concentration and category mix", expanded=False):
         st.caption(
             "Analyze category revenue distribution after all Executive Dashboard filters. "
             "This does not estimate industry-wide market share."

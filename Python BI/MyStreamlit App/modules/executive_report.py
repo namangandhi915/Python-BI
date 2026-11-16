@@ -1,4 +1,4 @@
-"""Streamlit Section 09 — on-demand, audited executive report downloads."""
+"""Streamlit Section 06 — on-demand, audited executive report downloads."""
 from __future__ import annotations
 
 import pandas as pd
@@ -18,7 +18,7 @@ def render_executive_report(
     mapping: dict[str, str],
     filter_summary: str,
 ) -> None:
-    with st.expander("09  ·  Executive report centre", expanded=False):
+    with st.expander("06  ·  Executive report centre", expanded=False):
         st.caption(
             "Create a standalone, print-ready executive HTML report from the same filtered records "
             "and commercial mapping used above. CSV reports include all category/period rows. "
@@ -55,7 +55,7 @@ def render_executive_report(
             )
         st.caption(
             "The printed report shows aggregate results only, not customer-level transaction records. "
-            "The transaction-level CSV audit remains in Section 03. "
+            "Transaction-level calculations are available in Commercial Intelligence. "
             "Use Chrome/Edge Print → Save as PDF after opening the downloaded HTML file."
         )
         if not st.button("Generate executive report", key="exec_report_generate", type="primary"):

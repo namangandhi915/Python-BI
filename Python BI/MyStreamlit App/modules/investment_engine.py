@@ -13,7 +13,7 @@ from math import isfinite, sqrt
 import pandas as pd
 
 
-FREQUENCY_PERIODS = {"Daily": 252, "Weekly": 52, "Monthly": 12}
+FREQUENCY_PERIODS = {"Daily": 252, "Weekly": 52, "Monthly": 12, "Quarterly": 4, "Yearly": 1}
 
 
 def _finite_number(value, label: str) -> float:
@@ -164,7 +164,7 @@ def evaluate_market_history(
     Annualized vol/Sharpe require >=30 observed returns and plausible date cadence.
     """
     if frequency not in FREQUENCY_PERIODS:
-        raise ValueError("Frequency must be Daily, Weekly, or Monthly.")
+        raise ValueError("Frequency must be Daily, Weekly, Monthly, Quarterly, or Yearly.")
     rf_pct = _finite_number(annual_risk_free_pct, "Annual risk-free rate")
     if not -99 < rf_pct <= 100:
         raise ValueError("Annual risk-free rate must be above -99% and at most 100%.")
@@ -172,8 +172,8 @@ def evaluate_market_history(
         raise ValueError("Upload a non-empty historical price dataset.")
     if date_col == price_col or date_col not in data.columns or price_col not in data.columns:
         raise ValueError("Choose distinct date and price columns.")
-    if len(data) > 100_000:
-        raise ValueError("The historical analysis is limited to 100,000 source rows.")
+    if len(data) > 1_000_000:
+        raise ValueError("The historical analysis is limited to 1,000,000 source rows.")
 
     dates = pd.to_datetime(data[date_col], errors="coerce", format="mixed", utc=True)
     prices = pd.to_numeric(data[price_col], errors="coerce")
@@ -198,6 +198,8 @@ def evaluate_market_history(
         "Daily": (0.5, 4.5),
         "Weekly": (4.5, 11.5),
         "Monthly": (24, 36),
+        "Quarterly": (75, 105),
+        "Yearly": (330, 400),
     }
     low, high = acceptable[frequency]
     cadence_ok = low <= median_gap <= high

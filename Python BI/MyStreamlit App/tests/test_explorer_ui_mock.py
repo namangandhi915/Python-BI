@@ -54,7 +54,7 @@ class FakeUI:
     def selectbox(self, _label, options, index=0, **kwargs):
         return list(options)[index]
     def checkbox(self, _label, value=False, **kwargs):
-        return value
+        return True if _label == "Prepare filtered CSV download" else value
     def dataframe(self, frame, **kwargs):
         self.tables.append(frame.copy())
     def download_button(self, _label, data, **kwargs):

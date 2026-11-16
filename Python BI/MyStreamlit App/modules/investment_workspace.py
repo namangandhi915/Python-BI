@@ -12,6 +12,7 @@ import json
 
 import pandas as pd
 import streamlit as st
+from local_file_guard import validate_upload
 
 from forecast_panel import render_business_stress_test, render_market_research
 
@@ -33,31 +34,7 @@ def _business_workspace(active_data: pd.DataFrame | None, active_name: str) -> N
     st.subheader("Business Investment Decisions")
     st.caption("Historical evidence and forward-looking project scenarios are kept separate. No returns are guaranteed.")
 
-    with st.expander("01 · Business dataset evidence", expanded=True):
-        if not isinstance(active_data, pd.DataFrame) or active_data.empty:
-            st.info("To inspect historical business evidence, activate a dataset in Data Workspace first. You can still model a standalone project scenario below.")
-        else:
-            st.caption(f"Active source: {active_name} · {len(active_data):,} records. These are not assumed to be annual cash flows.")
-            numeric_fields = active_data.select_dtypes(include="number").columns.tolist()
-            if not numeric_fields:
-                st.warning("No numeric fields detected. Prepare numeric columns in Data Workspace first.")
-            else:
-                default_revenue = next((i for i, name in enumerate(numeric_fields) if name.lower().strip() in ("sales", "revenue", "gross revenue")), 0)
-                revenue_col = st.selectbox("Observed revenue field", numeric_fields, index=default_revenue, key="ii_evidence_revenue")
-                cost_options = [MISSING_FIELD] + numeric_fields
-                default_cost = next((i for i, name in enumerate(cost_options) if name.lower().strip() in ("total cost", "cost", "cogs")), 0)
-                cost_col = st.selectbox("Mapped cost field (optional)", cost_options, index=default_cost, key="ii_evidence_cost")
-                try:
-                    evidence = summarize_business_evidence(active_data, revenue_col, None if cost_col == MISSING_FIELD else cost_col)
-                    c1, c2, c3 = st.columns(3)
-                    c1.metric("Observed revenue", _metric_value(evidence["observed_revenue"]))
-                    c2.metric("Mapped costs", _metric_value(evidence.get("observed_mapped_cost")))
-                    c3.metric("Profit after mapped costs", _metric_value(evidence.get("profit_after_mapped_cost")))
-                    st.caption("These are aggregates across the current dataset—not necessarily net profit, free cash flow, annual results, or an investment recommendation.")
-                except (ValueError, TypeError) as exc:
-                    st.error(str(exc))
-
-    with st.expander("02 · Evaluate an investment cash-flow scenario", expanded=True):
+    with st.expander("01 · Evaluate an investment cash-flow scenario", expanded=True):
         st.caption("Enter an initial outlay and incremental NET annual cash flows. Values are illustrative until you enter your own assumptions. Use one consistent currency/unit; no conversion is performed.")
         left, mid, right = st.columns(3)
         initial = left.number_input("Initial investment (year 0)", min_value=0.01, value=100000.0, step=1000.0, key="ii_initial")
@@ -128,11 +105,14 @@ def _market_workspace() -> None:
     if uploaded is None:
         st.info("Upload a file with one date/timestamp column and one numeric, strictly positive price column. A synthetic example is provided with the update package.")
         return
-    if uploaded.size > 25 * 1024 * 1024:
-        st.error("File exceeds the 25 MiB market-analysis limit. Reduce the input file size.")
-        return
     try:
-        data = pd.read_csv(io.BytesIO(uploaded.getvalue())) if uploaded.name.lower().endswith(".csv") else pd.read_excel(io.BytesIO(uploaded.getvalue()))
+        upload_info = validate_upload(uploaded)
+        cached = st.session_state.get("ii_market_data")
+        if cached is None or cached[0] != upload_info["sha256"]:
+            data = pd.read_csv(io.BytesIO(uploaded.getvalue())) if uploaded.name.lower().endswith(".csv") else pd.read_excel(io.BytesIO(uploaded.getvalue()))
+            cached = (upload_info["sha256"], data)
+            st.session_state["ii_market_data"] = cached
+        data = cached[1]
     except (ValueError, OSError, ImportError, UnicodeError) as exc:
         st.error(f"Could not read market file: {exc}")
         return
@@ -144,15 +124,25 @@ def _market_workspace() -> None:
     if len(set(colnames)) != len(colnames):
         st.error("Market file has duplicate column names. Rename those columns first.")
         return
+    if list(data.columns) != colnames:
+        data = data.copy(deep=False)
+        data.columns = colnames
     c1, c2, c3 = st.columns(3)
     default_date = next((i for i, c in enumerate(colnames) if "date" in c.lower() or "time" in c.lower()), 0)
     default_price = next((i for i, c in enumerate(colnames) if c.lower().strip() in ("adj close", "adjusted close", "close", "price")), min(1, len(colnames) - 1))
     date_col = c1.selectbox("Date field", colnames, index=default_date, key="ii_market_date")
     price_col = c2.selectbox("Price field", colnames, index=default_price, key="ii_market_price")
-    freq = c3.selectbox("Observation frequency", ["Daily", "Weekly", "Monthly"], key="ii_market_frequency")
+    freq = c3.selectbox("Observation frequency", ["Daily", "Weekly", "Monthly", "Quarterly", "Yearly"], key="ii_market_frequency")
+    st.caption("Select the frequency already present in the uploaded observations; the app does not resample daily data into quarterly or yearly prices.")
     rf = st.number_input("Assumed annual risk-free rate (%)", min_value=-50.0, max_value=100.0, value=0.0, step=0.25, key="ii_market_rf")
     try:
-        summary, history = evaluate_market_history(data, date_col, price_col, freq, rf)
+        analysis_key = (upload_info["sha256"], date_col, price_col, freq, rf)
+        analysis = st.session_state.get("ii_market_analysis")
+        if analysis is None or analysis[0] != analysis_key:
+            summary, history = evaluate_market_history(data, date_col, price_col, freq, rf)
+            analysis = (analysis_key, summary, history)
+            st.session_state["ii_market_analysis"] = analysis
+        _, summary, history = analysis
     except (ValueError, TypeError, OverflowError) as exc:
         st.error(str(exc))
         return
@@ -164,7 +154,11 @@ def _market_workspace() -> None:
     d, e = st.columns(2)
     d.metric("Annualized volatility", _metric_value(summary["annualized_volatility_pct"], "%"))
     e.metric("Historical Sharpe ratio", _metric_value(summary["annualized_sharpe"]))
-    st.line_chart(history.set_index("Date")[["Price"]])
+    chart_history = history if len(history) <= 5_000 else history.iloc[::max(1, (len(history) + 4_998) // 4_999)]
+    if len(chart_history) < len(history):
+        chart_history = pd.concat([chart_history, history.tail(1)]).drop_duplicates(subset=["Date"])
+        st.caption(f"Chart displays {len(chart_history):,} regularly spaced observations; calculations use all {len(history):,} records.")
+    st.line_chart(chart_history.set_index("Date")[["Price"]])
     if not summary["frequency_consistent"]:
         st.warning("The date spacing does not match the selected frequency. Annualized volatility and Sharpe are suppressed.")
     if summary["observed_return_count"] < 30:
@@ -174,13 +168,13 @@ def _market_workspace() -> None:
     st.caption("Price-only observations. Corporate actions, dividends, splits, expenses, fees, taxes, market holidays and currency changes are NOT inferred. No live pricing or investment recommendations are provided.")
     with st.expander("Historical return and drawdown audit"):
         st.dataframe(history.head(500), width="stretch", hide_index=True)
-        st.download_button(
-            "Download analysed historical prices (CSV)",
-            history.to_csv(index=False).encode("utf-8-sig"),
-            file_name="python_bi_market_history_analysis.csv",
-            mime="text/csv",
-            key="ii_market_export",
-        )
+        if st.checkbox("Prepare historical prices download", key="ii_market_prepare_export"):
+            st.download_button(
+                "Download analysed historical prices (CSV)",
+                history.to_csv(index=False).encode("utf-8-sig"),
+                file_name="python_bi_market_history_analysis.csv",
+                mime="text/csv", key="ii_market_export",
+            )
 
     render_market_research(history, freq, summary["frequency_consistent"])
 

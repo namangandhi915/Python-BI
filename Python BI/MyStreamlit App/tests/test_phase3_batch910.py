@@ -110,7 +110,7 @@ def test_scatter_histogram(source, calc):
     assert len(points) == 2 and meta["valid_rows"] == 5 and meta["excluded_rows"] == 1
     points_again, _ = scatter_chart_data(source, calc, "Source: Sales", "Calculated: Net Revenue", 2)
     pd.testing.assert_frame_equal(points, points_again)
-    fails(lambda: scatter_chart_data(source, calc, "Source: Sales", "Calculated: Net Revenue", 10_000),
+    fails(lambda: scatter_chart_data(source, calc, "Source: Sales", "Calculated: Net Revenue", 1_000_001),
           "too many points")
     hist, meta = histogram_chart_data(source, calc, "Source: Sales", bins=20)
     assert int(hist["Records"].sum()) == 5 and meta["excluded_measure_rows"] == 1

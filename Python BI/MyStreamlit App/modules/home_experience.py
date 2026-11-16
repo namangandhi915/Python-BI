@@ -62,4 +62,4 @@ def render_home() -> None:
         k2.metric("Source columns", f"{len(active.columns):,}")
         k3.metric("Active data status", "Connected")
         st.caption("Source counts describe the original active dataset, not Dashboard-filtered rows.")
-    st.caption("Open Data Workspace or Dashboard from the left sidebar to continue. Reports are available under Executive Dashboard → Section 09.")
+    st.caption("Open Data Workspace or Dashboard from the left sidebar to continue. Reports are available under Executive Dashboard → Section 06.")

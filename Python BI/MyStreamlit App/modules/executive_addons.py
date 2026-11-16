@@ -17,11 +17,13 @@ def _field_options(data: pd.DataFrame) -> list[str]:
 
 
 def render_comparison_panel(filtered: pd.DataFrame, calculations: pd.DataFrame) -> None:
-    with st.expander("05  ·  Compare financial periods", expanded=False):
+    with st.expander("03  ·  Compare financial periods", expanded=False):
         st.caption(
             "Compare two calendar months, quarters or years within the same Dashboard filters. "
             "Dates excluded from the comparison do not affect the Dashboard's main KPIs."
         )
+        if not st.checkbox("Calculate financial period comparison", key="cmp_run"):
+            return
         dates = _field_options(filtered)
         if not dates:
             st.info("This dataset has no identified date or timestamp field.")

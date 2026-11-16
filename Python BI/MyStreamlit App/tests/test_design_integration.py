@@ -10,8 +10,8 @@ def main():
     assert 'from operations_ui import render_operations_home' in app
     assert 'render_page_masthead(' in app
     assert 'if page == "Home":\n    render_home()' in app
-    assert 'render_assurance_home(st.session_state.get("uploaded_df"))' in app
-    assert '    render_operations_home()' in app
+    assert 'render_assurance_home(df)' in app
+    assert 'public deployment requires authentication' in app
     for required in ('def save_active_dataset','def restore_active_dataset','def delete_saved_dataset',
                      'render_explorer_workspace(df)','render_executive_dashboard(',
                      'render_investment_intelligence(','render_commercial_intelligence(current_data)',

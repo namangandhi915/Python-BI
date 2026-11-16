@@ -2,9 +2,17 @@
 from __future__ import annotations
 
 import pandas as pd
+import numpy as np
+import hashlib
 import streamlit as st
 
 NONE = "— Not provided —"
+
+
+def mapping_scope(data: pd.DataFrame, name: str) -> str:
+    """Bind field choices to the active source and its schema."""
+    schema = (name, tuple((str(column), str(dtype)) for column, dtype in data.dtypes.items()))
+    return hashlib.sha256(repr(schema).encode("utf-8")).hexdigest()
 
 
 def _numeric(data: pd.DataFrame, column: str | None) -> pd.Series:
@@ -12,7 +20,7 @@ def _numeric(data: pd.DataFrame, column: str | None) -> pd.Series:
     if not column or column == NONE:
         return pd.Series(0.0, index=data.index, dtype="float64")
     values = pd.to_numeric(data[column], errors="coerce")
-    invalid = values.isna() | ~values.map(lambda x: bool(pd.notna(x)) and abs(x) != float('inf'))
+    invalid = values.isna() | ~np.isfinite(values.to_numpy(dtype=float, na_value=np.nan))
     if invalid.any():
         raise ValueError(
             f"Financial field '{column}' has {int(invalid.sum()):,} missing or invalid "
@@ -110,8 +118,16 @@ def render_commercial_intelligence(data: pd.DataFrame) -> None:
         return
     fields = data.select_dtypes(include="number").columns.tolist()
     if not fields:
-        st.warning("No numeric source columns detected. Convert numeric-looking text in Prepare & Validate first.")
+        st.warning("No numeric source columns detected. Correct numeric-looking text in the source file and upload it again.")
         return
+
+    scope = mapping_scope(data, str(st.session_state.get("active_data_token", st.session_state.get("uploaded_name", "Active dataset"))))
+    saved = st.session_state.get("commercial_mapping", {})
+    if saved.get("scope") == scope:
+        for role, key in {"revenue":"ci_revenue", "cost":"ci_cost", "discount":"ci_discount", "returns":"ci_returns", "operating":"ci_opex", "taxes":"ci_taxes", "capital":"ci_capital"}.items():
+            choice = saved.get(role)
+            if key not in st.session_state and (choice in fields or (role != "revenue" and choice == NONE)):
+                st.session_state[key] = choice
 
     with st.expander("Financial source mapping", expanded=True):
         left, right = st.columns(2)
@@ -140,9 +156,12 @@ def render_commercial_intelligence(data: pd.DataFrame) -> None:
             complete, capital_additive
         )
     except (ValueError, TypeError, OverflowError) as exc:
+        if saved.get("scope") == scope:
+            st.session_state.pop("commercial_mapping", None)
         st.error(str(exc))
         return
 
+    st.session_state["commercial_mapping"] = {"scope": scope, "revenue": revenue, "cost": cost, "discount": discount, "returns": returns, "operating": operating, "taxes": taxes, "capital": capital}
     left, right = st.columns(2)
     left.metric("Gross Revenue", f"{m['gross_revenue']:,.2f}")
     right.metric("Net Revenue", f"{m['net_revenue']:,.2f}")
@@ -163,6 +182,19 @@ def render_commercial_intelligence(data: pd.DataFrame) -> None:
         col_b.metric("ROI (confirmed investment basis)", f"{roi:.2f}%" if roi is not None else "Not available")
     else:
         st.caption("Net Profit and ROI remain unavailable until the required assumptions are confirmed.")
+    date_fields = [c for c in data.columns if "date" in str(c).casefold() or "time" in str(c).casefold() or pd.api.types.is_datetime64_any_dtype(data[c])]
+    if date_fields:
+        from business_metrics import revenue_by_period
+        import plotly.express as px
+        with st.expander("Net revenue by period", expanded=False):
+            date_field = st.selectbox("Revenue trend date field", date_fields, key="ci_trend_date")
+            cadence = st.selectbox("Revenue trend period", ["Monthly", "Quarterly", "Yearly"], key="ci_trend_period")
+            series, excluded = revenue_by_period(data[date_field], calculated["Net Revenue"], cadence)
+            if excluded:
+                st.caption(f"{excluded:,} records with invalid dates excluded.")
+            if not series.empty:
+                st.plotly_chart(px.line(series, x="Period", y="Revenue", title="Net revenue by period"), width="stretch")
+
     with st.expander("Calculation notes and interpretation"):
         st.markdown("""
 - Net revenue = gross revenue − separately mapped discounts − returns.
@@ -174,8 +206,11 @@ def render_commercial_intelligence(data: pd.DataFrame) -> None:
 - Null, malformed or infinite values in mapped financial fields block the calculation until fixed.
         """)
     with st.expander("Audit individual calculations and export"):
-        st.dataframe(calculated.head(200), width="stretch")
-        st.download_button(
-            "Download calculated metrics", calculated.to_csv(index=False).encode("utf-8"),
-            file_name="python_bi_commercial_metrics.csv", mime="text/csv", key="ci_export"
-        )
+        show_all = st.checkbox("Show all calculated entries", key="ci_audit_all")
+        audit_limit = int(st.number_input("Calculated entries to show", min_value=1, max_value=1_000_000, value=200, step=100, key="ci_audit_limit"))
+        st.dataframe(calculated if show_all else calculated.head(audit_limit), width="stretch")
+        if st.checkbox("Prepare calculated metrics download", key="ci_prepare_export"):
+            st.download_button(
+                "Download calculated metrics", calculated.to_csv(index=False).encode("utf-8"),
+                file_name="python_bi_commercial_metrics.csv", mime="text/csv", key="ci_export"
+            )

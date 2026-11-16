@@ -107,7 +107,7 @@ class MarketHistoryTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Invalid rows"):
             evaluate_market_history(bad, "date", "price")
         with self.assertRaisesRegex(ValueError, "Frequency"):
-            evaluate_market_history(bad, "date", "price", "Yearly")
+            evaluate_market_history(bad, "date", "price", "Hourly")
 
 
 class WiringTests(unittest.TestCase):

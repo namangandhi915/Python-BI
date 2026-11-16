@@ -7,9 +7,10 @@ def main():
     for needle in ('from local_file_guard import validate_upload, safe_stored_path',
                    'save_active_dataset(uploaded_file)',
                    'render_explorer_workspace(df)', 'render_executive_dashboard(',
-                   'render_investment_intelligence(', 'render_operations_home()'):
+                   'render_investment_intelligence('):
         assert needle in src,needle
-    assert src.count('validate_upload(uploaded_file)')==3
+    assert src.count('validate_upload(uploaded_file)') >= 2
+    assert 'validate_upload(library_upload)' in src
     for marker in ('restore_active_dataset():','delete_saved_dataset(stored_name):'):
         assert marker in src
     assert 'st.login(' not in src

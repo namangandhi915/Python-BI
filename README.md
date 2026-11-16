@@ -52,6 +52,14 @@ To update an existing clone, stop the app, open a terminal at the repository roo
 
 If port 8501 is already in use, check whether another copy of the app is still running and stop it with **Ctrl+C** in its terminal before starting this one.
 
+## Working with datasets
+
+Use **Dataset Library → Add a dataset to the library** to save and activate a CSV or XLSX file locally. In **Data Workspace → Explore**, upload multiple files and select one or more under **Files to analyse together**. New Explorer uploads are also saved locally. Multiple selected files are stacked by matching column names; they are not joined by a key. Fields missing from a file become empty in the combined view. Select one file for separate analysis.
+
+**Prepare & Validate → Platform assurance** contains the quality sample and Explorer preview controls. They are separate limits: the first controls how many rows are checked for the diagnostic, while the second controls how many matching rows Explorer displays. Exact quality scans, large previews, and large exports can take substantial time and memory. Prepared copies automatically trim text whitespace; the source files remain unchanged.
+
+Choose financial fields in **Commercial Intelligence → Financial Performance**. Dashboard calculations use that source's selected mapping or clearly identified suggested fields. Market observation frequency describes the spacing of the uploaded prices; choosing quarterly or yearly does not resample a daily file. Data is processed in memory and uploads are limited to 256 MiB per file, so practical capacity depends on file width, format, browser, and available memory.
+
 ## Project layout
 
 All app files live under `Python BI/MyStreamlit App/`:
@@ -75,11 +83,11 @@ MyStreamlit App/
 From the `Python BI/MyStreamlit App` folder, run:
 
 ```bash
-.venv/bin/python scripts/verify_final_release.py
+.venv/bin/python tests/test_workspace_update.py
 .venv/bin/python scripts/run_final_gate_tests.py
 .venv/bin/python scripts/run_final_acceptance.py --rows 10000
 ```
 
-On Windows, replace `.venv/bin/python` with `.venv\Scripts\python.exe`. Automated acceptance uses synthetic data. Browser acceptance steps are in `Python BI/MyStreamlit App/docs/05_GATE_BROWSER_CHECKLIST.md`.
+On Windows, replace `.venv/bin/python` with `.venv\Scripts\python.exe`. Automated acceptance uses synthetic data. The Streamlit integration test requires loopback access. The older `verify_final_release.py` and its manifest describe a historical package and do not verify later changes.
 
 For more detail, see the [installation guide](Python%20BI/MyStreamlit%20App/README_INSTALL.md) and [operations guides](Python%20BI/MyStreamlit%20App/docs/).

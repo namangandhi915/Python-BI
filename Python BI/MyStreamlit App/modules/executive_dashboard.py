@@ -6,7 +6,7 @@ import plotly.express as px
 import streamlit as st
 
 from business_metrics import apply_dashboard_filters, revenue_by_period
-from commerce_engine import NONE, calculate_commercial_metrics
+from commerce_engine import NONE, calculate_commercial_metrics, mapping_scope
 from audit_exports import build_financial_export, excel_safe_csv
 from performance_insights import category_profitability, loss_making_rows
 from executive_addons import render_comparison_panel, render_readiness_panel
@@ -26,7 +26,7 @@ def _default(options: list[str], preferred: list[str], fallback: int = 0) -> int
 def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
     st.header("Executive Performance Dashboard")
     st.caption(f"Dataset: {dataset_name}  •  All figures on this page reflect the selected filters.")
-    st.caption("Want to change the graph type? Expand Section 07 · Interactive chart studio below; choose bar, line, area, donut, scatter or histogram.")
+    st.caption("Want to change the graph type? Expand Section 05 · Interactive chart studio below; choose bar, line, area, donut, scatter or histogram.")
     if data.empty:
         st.warning("The active dataset has no records.")
         return
@@ -56,11 +56,12 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
             selected = None
             category_values = []
             if category != "No category filter":
-                category_values = sorted(data[category].dropna().astype(str).unique().tolist())
-                if len(category_values) > 250:
+                category_size = data[category].nunique(dropna=True)
+                if category_size > 250:
                     st.info("This field has over 250 values; use another category for an interactive selector.")
                     category = "No category filter"
                 else:
+                    category_values = sorted(data[category].dropna().astype(str).unique().tolist())
                     selected = st.multiselect(
                         "Values to include", category_values, default=category_values,
                         key=f"ex_values_{category}",
@@ -85,23 +86,6 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
                     )
                 elif parsed.empty:
                     st.warning("No valid dates are available in the selected field.")
-        numeric_filter = st.selectbox(
-            "Additional numeric filter", ["No numeric filter"] + numeric,
-            key="ex_number_field",
-        )
-        value_bounds = None
-        if numeric_filter != "No numeric filter":
-            series = pd.to_numeric(data[numeric_filter], errors="coerce").dropna()
-            series = series[series.map(lambda v: bool(pd.notna(v)) and abs(v) != float("inf"))]
-            if not series.empty:
-                lower_default, upper_default = float(series.min()), float(series.max())
-                n1, n2 = st.columns(2)
-                with n1:
-                    low = st.number_input("Minimum", value=lower_default, key=f"ex_min_{numeric_filter}")
-                with n2:
-                    high = st.number_input("Maximum", value=upper_default, key=f"ex_max_{numeric_filter}")
-                value_bounds = (low, high)
-
     # A partially selected date range must not silently apply only one endpoint.
     start = end = None
     if date_col != "No date filter" and isinstance(date_bounds, (list, tuple)):
@@ -109,10 +93,6 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
             start, end = date_bounds
         else:
             st.info("Choose both endpoints to apply the date filter.")
-    if value_bounds is not None and value_bounds[0] > value_bounds[1]:
-        st.error("Minimum must be less than or equal to maximum.")
-        return
-
     try:
         filtered = apply_dashboard_filters(
             data,
@@ -121,9 +101,6 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
             categories=selected if selected is not None and len(selected) < len(category_values) else None,
             date_column=date_col if start is not None else None,
             start_date=start, end_date=end,
-            numeric_column=numeric_filter if value_bounds is not None else None,
-            numeric_min=value_bounds[0] if value_bounds is not None else None,
-            numeric_max=value_bounds[1] if value_bounds is not None else None,
         ).reset_index(drop=True)
     except (ValueError, TypeError) as error:
         st.error(f"The filter is invalid: {error}")
@@ -134,30 +111,29 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
         st.warning("No records match. Adjust the filters to continue.")
         return
 
-    with st.expander("02  ·  Confirm financial field mapping", expanded=True):
-        a, b = st.columns(2)
-        with a:
-            revenue_col = st.selectbox(
-                "Gross revenue field", numeric,
-                index=_default(numeric, ["Sales", "Gross Revenue", "Revenue"]),
-                key="ex_revenue",
-            )
-            cost_col = st.selectbox(
-                "Cost of sales field (optional)", [NONE] + numeric,
-                index=_default([NONE] + numeric, ["Total Cost", "COGS", "Cost"]),
-                key="ex_cost",
-            )
-        with b:
-            discount_col = st.selectbox("Discounts (optional)", [NONE] + numeric, key="ex_discount")
-            returns_col = st.selectbox("Returns (optional)", [NONE] + numeric, key="ex_returns")
-        st.caption(
-            "Gross revenue must be before separately mapped discounts/returns. "
-            "Do not map a field twice or treat Profit as a cost. All amounts must use one currency."
-        )
+    mapping = st.session_state.get("commercial_mapping", {})
+    scope = mapping_scope(data, str(st.session_state.get("active_data_token", dataset_name)))
+    if mapping.get("scope") == scope:
+        revenue_col = mapping["revenue"]
+        cost_col = mapping["cost"]
+        discount_col = mapping["discount"]
+        returns_col = mapping["returns"]
+        operating_col = mapping["operating"]
+        taxes_col = mapping["taxes"]
+        st.caption("Financial fields use the selected mapping in Commercial Intelligence for this dataset.")
+    else:
+        candidates = [col for col in numeric if str(col).casefold() in {"sales", "gross revenue", "revenue"}]
+        if not candidates:
+            st.info("Choose the revenue field in Data Workspace → Commercial Intelligence → Financial Performance to show the dashboard.")
+            return
+        revenue_col = candidates[0]
+        cost_col = ([NONE] + numeric)[_default([NONE] + numeric, ["Total Cost", "COGS", "Cost"])]
+        discount_col = returns_col = operating_col = taxes_col = NONE
+        st.caption(f"Suggested financial fields: revenue = {revenue_col}; cost = {cost_col}. Confirm or change these in Commercial Intelligence.")
 
     try:
         calculations, totals = calculate_commercial_metrics(
-            filtered, revenue_col, cost_col, discount_col, returns_col
+            filtered, revenue_col, cost_col, discount_col, returns_col, operating_col, taxes_col
         )
     except (ValueError, TypeError, OverflowError) as error:
         st.error(f"Financial calculation blocked: {error}")
@@ -182,8 +158,10 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
     chart_col, chart_col2 = st.columns(2)
     with chart_col:
         st.markdown("#### Revenue by category")
-        if category != "No category filter" or text_fields:
-            dimension = category if category != "No category filter" else text_fields[0]
+        dimension = category if category != "No category filter" else next(
+            (field for field in text_fields if filtered[field].nunique(dropna=True) <= 250), None
+        )
+        if dimension is not None:
             chart_frame = pd.DataFrame({
                 "Category": filtered[dimension].astype("string").fillna("(Missing)").to_numpy(),
                 "Net Revenue": calculations["Net Revenue"].to_numpy(),
@@ -197,7 +175,7 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
                 width="stretch",
             )
         else:
-            st.info("Add a text/category field to compare revenue across groups.")
+            st.info("Select a category with at most 250 values to compare revenue across groups.")
     with chart_col2:
         st.markdown("#### Revenue trend")
         if date_col == "No date filter":
@@ -222,22 +200,10 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
             except ValueError as error:
                 st.warning(f"Cannot calculate the trend: {error}")
 
-    with st.expander("03  ·  Audit records and download", expanded=False):
-        st.dataframe(filtered.head(200), width="stretch")
-        output = build_financial_export(filtered, calculations)
-        st.download_button(
-            "Download filtered records and financial calculations",
-            data=excel_safe_csv(output),
-            file_name="python_bi_executive_filtered_data.csv", mime="text/csv", key="ex_export",
-        )
-        st.caption(
-            "Export includes all matching records, not just the 200 previewed rows. "
-            "Calculated fields are named BI_Gross_Revenue, BI_Net_Revenue, etc. "
-            "Spreadsheet-dangerous text is protected in the exported copy."
-        )
-
-    if "Mapped Costs" in calculations.columns:
-        with st.expander("04  ·  Category profitability and transaction exceptions", expanded=False):
+    with st.expander("02  ·  Category profitability and transaction exceptions", expanded=False):
+        if "Mapped Costs" not in calculations.columns:
+            st.info("Map a cost-of-sales field in Commercial Intelligence to view profitability and exceptions.")
+        elif st.checkbox("Calculate category profitability and exceptions", key="ex_profit_run"):
             st.caption(
                 "These results use exactly the filtered records and financial field mapping above. "
                 "Profit is after mapped costs; it is not necessarily accounting net profit."
@@ -283,12 +249,19 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
 
     # Phase 3 Batches 7 + 8: optional consolidated analytical diagnostics.
     render_comparison_panel(filtered, calculations)
-    render_readiness_panel(data)
+    with st.expander("04  ·  Column comparison and missing-value details", expanded=False):
+        columns = st.multiselect("Choose two columns to compare", filtered.columns.tolist(), max_selections=2, key="dashboard_compare_columns")
+        if len(columns) == 2:
+            st.dataframe(filtered[columns].head(100), width="stretch")
+            st.caption(f"Showing up to 100 of {len(filtered):,} filtered records.")
+            missing = filtered[columns].isna().sum()
+            st.dataframe(pd.DataFrame({"Column": columns, "Missing values": [int(missing[c]) for c in columns]}), hide_index=True, width="stretch")
+        else:
+            st.info("Select two columns to compare.")
 
     # Phase 3 Batches 9 + 10: chart selection without leaving Executive Overview.
     render_chart_studio(filtered, calculations)
     # Intentionally source-wide and opt-in, unlike Dashboard-filtered charts.
-    render_performance_lab(data)
 
     # Phase 3 Batches 11 + 12 — executive report uses the same filtered results.
     filter_descriptions = [f"{len(filtered):,} of {len(data):,} source records included"]
@@ -299,10 +272,9 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
                                        (" (additional values omitted from label)" if len(selected) > 20 else ""))
     if start is not None:
         filter_descriptions.append(f"Dates {start} through {end} in {date_col}")
-    if value_bounds is not None:
-        filter_descriptions.append(f"{numeric_filter} from {value_bounds[0]:,.2f} to {value_bounds[1]:,.2f}")
     mapping = {"Gross revenue": revenue_col, "Cost of sales": cost_col,
-               "Discounts": discount_col, "Returns": returns_col}
+               "Discounts": discount_col, "Returns": returns_col,
+               "Operating expenses": operating_col, "Taxes": taxes_col}
     render_executive_report(
         filtered, calculations, totals,
         dataset_name=dataset_name,

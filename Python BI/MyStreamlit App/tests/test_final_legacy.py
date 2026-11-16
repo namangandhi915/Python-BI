@@ -10,8 +10,8 @@ assert not assess_legacy(src.assign(Profit=[999.])).compatible
 assert not assess_legacy(src.assign(Sales=[float('nan')])).compatible
 assert not assess_legacy(src, max_rows=0).compatible
 app=(Path(__file__).resolve().parents[1]/'app.py').read_text(encoding='utf-8')
-assert 'legacy_assessment = assess_legacy(' in app
-assert 'render_safe_details' in app
+assert 'Detailed Analytics (Legacy)' not in app
+assert 'render_executive_dashboard(' in app
 assert 'render_executive_dashboard = instrument("Executive Dashboard"' in app
 assert 'professor_review_ui' not in app
 print('PASS: Legacy schema guard, finance reconciler, safe fallback and existing Dashboard wiring')

@@ -10,7 +10,7 @@ from typing import Any
 import pandas as pd
 
 DEFAULT_SAMPLE = 2000
-MAX_SAMPLE = 10000
+MAX_SAMPLE = 1_000_000
 
 
 def schema_fingerprint(frame: pd.DataFrame) -> str:
@@ -38,8 +38,9 @@ def inspect_dataset(frame: pd.DataFrame | None, *, sample_size: int = DEFAULT_SA
         raise ValueError('All column names must be text.')
     rows, cols = frame.shape
     count = min(rows, sample_size)
-    sampled = (frame.sample(n=count, random_state=61).reset_index(drop=True)
-               if count else frame.iloc[:0].copy())
+    sampled = (frame if count == rows else
+               frame.sample(n=count, random_state=61).reset_index(drop=True)
+               if count else frame.iloc[:0])
     missing = frame.isna().sum() if exact else sampled.isna().sum()
     duplicates = (int(frame.duplicated().sum()) if exact and cols else
                   int(sampled.duplicated().sum()) if cols else 0)

@@ -28,7 +28,8 @@
   font-family: var(--bi-font);
 }
 section.main .block-container { max-width: 1510px; padding: 1.4rem clamp(1rem,3.3vw,3.5rem) 4rem; }
-[data-testid="stSidebar"] { background: var(--bi-sidebar); border-right: 1px solid #D4E0ED; min-width: 284px; }
+[data-testid="stSidebar"] { background: var(--bi-sidebar); border-right: 1px solid #D4E0ED; }
+[data-testid="stSidebarCollapseButton"] { visibility: visible !important; }
 [data-testid="stSidebar"] [data-testid="stSidebarUserContent"] { padding-top: 1.45rem; }
 [data-testid="stSidebar"] .bi-brand { display:flex; align-items:center; gap:14px; margin:7px 0 25px; }
 [data-testid="stSidebar"] .bi-brand-icon { background:var(--bi-navy); color:white; width:54px; height:54px; display:grid; place-items:center; border-radius:13px; box-shadow:0 5px 15px rgba(20,43,74,.12); font-size:1.32rem; font-weight:800; flex-shrink:0; }

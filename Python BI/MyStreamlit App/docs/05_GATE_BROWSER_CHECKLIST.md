@@ -1,3 +1,5 @@
+> Historical checklist for the earlier release; several sections were moved or removed. See the repository README for the current workflow.
+
 # Five final acceptance gates — one local browser session
 
 **Purpose:** Close the original Python BI Studio local-development roadmap, not to host the website or obtain professor approval inside the application.

@@ -51,10 +51,8 @@ def render_explorer_workspace(source: pd.DataFrame) -> None:
             placeholder="Example: Laptop, Delhi, T001 or 2026-01",
             key=widget_key("query"),
         )
-        preview_limit = st.selectbox(
-            "Maximum preview rows", [10, 20, 50, 100, 500, 1000],
-            index=3, key=widget_key("preview_rows"),
-        )
+        preview_limit = getattr(st, "session_state", {}).get("explorer_preview_setting", 100)
+        st.caption(f"Preview limit: {preview_limit:,} rows. Change it in Prepare & Validate → Platform assurance.")
 
     if not selected:
         st.info("Choose at least one column to explore.")
@@ -69,6 +67,19 @@ def render_explorer_workspace(source: pd.DataFrame) -> None:
     ascending = True
 
     with st.expander("02 · Optional filters and sorting", expanded=False):
+        sort_choice = st.selectbox(
+            "Sort matching records", ["No sorting", *selected],
+            key=widget_key("sort_column"),
+        )
+        if sort_choice != "No sorting":
+            sort_column = sort_choice
+            ascending = st.radio(
+                "Sort direction", ["Ascending", "Descending"],
+                horizontal=True, key=widget_key("sort_direction"),
+            ) == "Ascending"
+            if len(source) >= 100_000:
+                st.caption("Sorting large matching sets may take additional time and memory.")
+
         category_choice = st.selectbox(
             "Category column", ["No category filter", *selected],
             key=widget_key("category_column"),
@@ -114,30 +125,19 @@ def render_explorer_workspace(source: pd.DataFrame) -> None:
             else:
                 st.info("The chosen numeric field has no finite values.")
 
-        sort_choice = st.selectbox(
-            "Sort matching records", ["No sorting", *selected],
-            key=widget_key("sort_column"),
-        )
-        if sort_choice != "No sorting":
-            sort_column = sort_choice
-            ascending = st.radio(
-                "Sort direction", ["Ascending", "Descending"],
-                horizontal=True, key=widget_key("sort_direction"),
-            ) == "Ascending"
-            if len(source) >= 100_000:
-                st.caption("Sorting large matching sets may take additional time and memory.")
 
     if numeric_column and numeric_min > numeric_max:
         st.warning("The minimum numeric value must not exceed the maximum.")
         return
 
+    prepare_download = st.checkbox("Prepare filtered CSV download", key=widget_key("prepare_download"), help="Build the download after choosing filters; large exports may take time and memory.")
     try:
         preview, export_rows, info = explore_dataset(
             source, selected, search_text=query,
             category_column=category_column, category_values=selected_values,
             numeric_column=numeric_column, minimum=numeric_min, maximum=numeric_max,
             sort_column=sort_column, ascending=ascending,
-            preview_limit=preview_limit, export_limit=MAX_EXPORT_ROWS,
+            preview_limit=preview_limit, export_limit=MAX_EXPORT_ROWS if prepare_download else 1,
             chunk_size=DEFAULT_CHUNK_SIZE,
         )
     except (ValueError, TypeError, OverflowError) as error:
@@ -156,36 +156,12 @@ def render_explorer_workspace(source: pd.DataFrame) -> None:
         "The complete active dataset is not changed."
     )
 
-    with st.expander("03 · Download and field quality", expanded=False):
-        if info.export_truncated:
-            st.warning(
-                f"{info.matched_rows:,} records match, but the download is capped "
-                f"at {info.exported_rows:,} rows. It is a PARTIAL export. "
-                "Refine your filters to export all matching rows."
-            )
-        else:
-            st.caption(f"This export contains all {info.exported_rows:,} matching rows.")
-        if info.exported_rows:
-            st.download_button(
-                "Download filtered CSV",
-                excel_safe_csv(export_rows),
-                file_name="python_bi_full_dataset_explorer.csv",
-                mime="text/csv", key=widget_key("csv"),
-            )
-        else:
-            st.info("No matching records are available to export.")
-
-        st.caption("Source field summary. Exact missing counts are optional on large files.")
-        check_exact = st.checkbox(
-            "Calculate exact missing and duplicate counts",
-            value=len(source) <= 25_000,
-            key=widget_key("exact_quality"),
-        )
-        field_info = pd.DataFrame({
-            "Column": [str(col) for col in source.columns],
-            "Data type": [str(dtype) for dtype in source.dtypes],
-        })
-        if check_exact:
-            field_info["Missing cells"] = source.isna().sum().to_numpy(dtype=int)
-            st.metric("Exact duplicate records", f"{source.duplicated().sum():,}")
-        st.dataframe(field_info, width="stretch", hide_index=True)
+    if not prepare_download:
+        return
+    if info.export_truncated:
+        st.warning(f"Download contains {info.exported_rows:,} of {info.matched_rows:,} matching rows. Refine filters for a complete export.")
+    if info.exported_rows:
+        st.download_button("Download filtered CSV", excel_safe_csv(export_rows),
+                           file_name="python_bi_full_dataset_explorer.csv", mime="text/csv", key=widget_key("csv"))
+    else:
+        st.info("No matching records are available to export.")

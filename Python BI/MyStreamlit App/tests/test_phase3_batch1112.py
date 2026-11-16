@@ -125,7 +125,7 @@ def test_home_code_wiring():
     assert "render_executive_report(" in dashboard
     assert ".bi-home-hero" in style and ".bi-home-grid" in style
     assert "render_chart_studio(filtered, calculations)" in dashboard
-    assert "render_performance_lab(data)" in dashboard
+    assert "render_performance_lab(data)" not in dashboard
     assert '"Data Workspace", "Dashboard"' in application
     # Existing Phase 2 persistence and Phase 3 modules are still in the app.
     assert "def restore_active_dataset" in application

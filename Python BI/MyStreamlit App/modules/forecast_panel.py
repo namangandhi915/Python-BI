@@ -21,7 +21,7 @@ from forecast_engine import (
 def render_business_stress_test(
     initial: float, annual_flows: list[float], discount_rate_pct: float
 ) -> None:
-    with st.expander("03 · Business scenario stress tests (not forecasts)", expanded=False):
+    with st.expander("02 · Business scenario stress tests (not forecasts)", expanded=False):
         st.caption(
             "Vary the NET annual cash flows you entered above. Downside makes positive "
             "cash flows smaller and negative cash flows more negative; upside does the "

@@ -13,8 +13,8 @@ import numpy as np
 import pandas as pd
 
 DEFAULT_CHUNK_SIZE = 20_000
-MAX_PREVIEW_ROWS = 1_000
-MAX_EXPORT_ROWS = 50_000
+MAX_PREVIEW_ROWS = 1_000_000
+MAX_EXPORT_ROWS = 1_000_000
 
 
 @dataclass(frozen=True)
@@ -135,9 +135,9 @@ def explore_dataset(
     """
     checked = _valid_columns(source, selected)
     if not 1 <= int(preview_limit) <= MAX_PREVIEW_ROWS:
-        raise ValueError("Preview must contain 1–1,000 records.")
+        raise ValueError(f"Preview must contain 1–{MAX_PREVIEW_ROWS:,} records.")
     if not 1 <= int(export_limit) <= MAX_EXPORT_ROWS:
-        raise ValueError("Export must contain 1–50,000 records.")
+        raise ValueError(f"Export must contain 1–{MAX_EXPORT_ROWS:,} records.")
     if sort_column is not None and sort_column not in checked:
         raise ValueError("Sort field must be a selected column.")
     start = perf_counter()

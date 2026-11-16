@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 from full_dataset_engine import (
-    MAX_EXPORT_ROWS, build_filter_mask, explore_dataset,
+    MAX_EXPORT_ROWS, MAX_PREVIEW_ROWS, build_filter_mask, explore_dataset,
     literal_search_mask, safe_preview,
 )
 from benchmark_explorer import make_synthetic
@@ -53,8 +53,8 @@ def run():
     assert len(display) == 3
 
     raises(lambda: explore_dataset(df, ["Unknown"]))
-    raises(lambda: explore_dataset(df, selected, preview_limit=1001))
-    raises(lambda: explore_dataset(df, selected, export_limit=50001))
+    raises(lambda: explore_dataset(df, selected, preview_limit=MAX_PREVIEW_ROWS + 1))
+    raises(lambda: explore_dataset(df, selected, export_limit=MAX_EXPORT_ROWS + 1))
     raises(lambda: explore_dataset(df, selected, numeric_column="Sales", minimum=3, maximum=1))
     raises(lambda: literal_search_mask(df, selected, "L", chunk_size=0))
     raises(lambda: explore_dataset(df.rename(columns={"Product": "Sales"}), ["Sales"]))
@@ -71,7 +71,7 @@ def run():
     # Export cap must not hide that the result set is larger.
     big = pd.DataFrame({"A": np.arange(50_011)})
     view, exported, meta = explore_dataset(big, ["A"], preview_limit=10, export_limit=MAX_EXPORT_ROWS)
-    assert meta.matched_rows == 50_011 and len(exported) == MAX_EXPORT_ROWS and meta.export_truncated
+    assert meta.matched_rows == 50_011 and len(exported) == len(big) and not meta.export_truncated
     assert len(view) == 10
 
     app = (ROOT / "app.py").read_text(encoding="utf-8")

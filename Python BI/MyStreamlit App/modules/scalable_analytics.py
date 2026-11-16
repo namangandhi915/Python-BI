@@ -14,7 +14,7 @@ import pandas as pd
 PERIODS = {"Monthly": "M", "Quarterly": "Q", "Yearly": "Y"}
 MAX_GROUPS = 50
 MAX_PERIODS = 250
-MAX_SCATTER_POINTS = 5_000
+MAX_SCATTER_POINTS = 1_000_000
 
 
 def numeric_measure_options(source: pd.DataFrame, calculations: pd.DataFrame) -> list[str]:

@@ -76,8 +76,8 @@ def _observed_returns(history: pd.DataFrame) -> tuple[np.ndarray, np.ndarray]:
     """Validate a chronological market-history output from evaluate_market_history."""
     if not isinstance(history, pd.DataFrame) or not {"Date", "Price"}.issubset(history.columns):
         raise ValueError("Provide validated historical Date/Price rows from Financial Markets.")
-    if not 2 <= len(history) <= 100_000:
-        raise ValueError("Historical price series must contain between 2 and 100,000 records.")
+    if not 2 <= len(history) <= 1_000_000:
+        raise ValueError("Historical price series must contain between 2 and 1,000,000 records.")
     dates = pd.to_datetime(history["Date"], utc=True, errors="coerce")
     prices = pd.to_numeric(history["Price"], errors="coerce").to_numpy(dtype=float)
     if dates.isna().any() or not np.isfinite(prices).all() or (prices <= 0).any():
@@ -108,7 +108,7 @@ def simulate_historical_bootstrap(
     This is a distribution of sampled scenarios, not a predictive confidence band.
     """
     if frequency not in FREQUENCY_PERIODS:
-        raise ValueError("Frequency must be Daily, Weekly or Monthly.")
+        raise ValueError("Frequency must be Daily, Weekly, Monthly, Quarterly or Yearly.")
     if type(horizon_periods) is not int or not 1 <= horizon_periods <= 60:
         raise ValueError("Horizon must be an integer between 1 and 60 observations.")
     if type(simulated_paths) is not int or not 500 <= simulated_paths <= 3000:
