@@ -60,7 +60,7 @@ def render_business_stress_test(
 
 
 def render_market_research(history: pd.DataFrame, frequency: str, cadence_ok: bool) -> None:
-    with st.expander("03 · Forecasting research — historical bootstrap and backtest", expanded=False):
+    with st.expander("Forecasting research — historical bootstrap and backtest", expanded=False):
         st.warning(
             "Experimental research only. Resampling past price returns is NOT a calibrated "
             "prediction, a market forecast, or an investment recommendation. The expanding-mean "
