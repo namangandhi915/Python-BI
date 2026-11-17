@@ -23,18 +23,43 @@ def _default(options: list[str], preferred: list[str], fallback: int = 0) -> int
     return fallback
 
 
+def _render_column_comparison(filtered: pd.DataFrame) -> None:
+    with st.expander("04  ·  Column comparison and missing-value details", expanded=False):
+        columns = st.multiselect("Choose two columns to compare", filtered.columns.tolist(), max_selections=2, key="dashboard_compare_columns")
+        if len(columns) == 2:
+            st.dataframe(filtered[columns].head(100), width="stretch")
+            st.caption(f"Showing up to 100 of {len(filtered):,} filtered records.")
+            missing = filtered[columns].isna().sum()
+            st.dataframe(pd.DataFrame({"Column": columns, "Missing values": [int(missing[c]) for c in columns]}), hide_index=True, width="stretch")
+        else:
+            st.info("Select two columns to compare.")
+
+
+def _render_dashboard_without_financials(filtered: pd.DataFrame) -> None:
+    """Keep source-data tools accessible when financial metrics cannot be calculated."""
+    message = "Choose a valid revenue field in Data Workspace → Commercial Intelligence → Financial Performance to use this section."
+    for title in ("02  ·  Category profitability and transaction exceptions", "03  ·  Compare financial periods"):
+        with st.expander(title, expanded=False):
+            st.info(message)
+    _render_column_comparison(filtered)
+    render_chart_studio(filtered, pd.DataFrame(index=filtered.index))
+    for title in ("06  ·  Executive report centre", "07  ·  Revenue concentration and category mix"):
+        with st.expander(title, expanded=False):
+            st.info(message)
+
+
 def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
     st.header("Executive Performance Dashboard")
     st.caption(f"Dataset: {dataset_name}  •  All figures on this page reflect the selected filters.")
     st.caption("Want to change the graph type? Expand Section 05 · Interactive chart studio below; choose bar, line, area, donut, scatter or histogram.")
     if data.empty:
         st.warning("The active dataset has no records.")
+        _render_dashboard_without_financials(data)
         return
 
     numeric = data.select_dtypes(include="number").columns.tolist()
     if not numeric:
-        st.warning("No numeric financial fields are available. Prepare the source data first.")
-        return
+        st.warning("No numeric financial fields are available. Prepare the source data to calculate financial metrics.")
 
     text_fields = data.select_dtypes(include=["object", "string", "category"]).columns.tolist()
     category_options = ["No category filter"] + text_fields
@@ -109,6 +134,7 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
     st.caption(f"{len(filtered):,} of {len(data):,} records matched the filters.")
     if filtered.empty:
         st.warning("No records match. Adjust the filters to continue.")
+        _render_dashboard_without_financials(filtered)
         return
 
     mapping = st.session_state.get("commercial_mapping", {})
@@ -126,7 +152,8 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
     else:
         candidates = [col for col in numeric if str(col).casefold() in {"sales", "gross revenue", "revenue"}]
         if not candidates:
-            st.info("Choose the revenue field in Data Workspace → Commercial Intelligence → Financial Performance to show the dashboard.")
+            st.info("Choose the revenue field in Data Workspace → Commercial Intelligence → Financial Performance to enable financial metrics. Source-data tools remain available below.")
+            _render_dashboard_without_financials(filtered)
             return
         revenue_col = candidates[0]
         cost_col = ([NONE] + numeric)[_default([NONE] + numeric, ["Total Cost", "COGS", "Cost"])]
@@ -139,6 +166,7 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
         )
     except (ValueError, TypeError, OverflowError) as error:
         st.error(f"Financial calculation blocked: {error}")
+        _render_dashboard_without_financials(filtered)
         return
 
     headline = st.columns(4)
@@ -251,15 +279,7 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
 
     # Phase 3 Batches 7 + 8: optional consolidated analytical diagnostics.
     render_comparison_panel(filtered, calculations)
-    with st.expander("04  ·  Column comparison and missing-value details", expanded=False):
-        columns = st.multiselect("Choose two columns to compare", filtered.columns.tolist(), max_selections=2, key="dashboard_compare_columns")
-        if len(columns) == 2:
-            st.dataframe(filtered[columns].head(100), width="stretch")
-            st.caption(f"Showing up to 100 of {len(filtered):,} filtered records.")
-            missing = filtered[columns].isna().sum()
-            st.dataframe(pd.DataFrame({"Column": columns, "Missing values": [int(missing[c]) for c in columns]}), hide_index=True, width="stretch")
-        else:
-            st.info("Select two columns to compare.")
+    _render_column_comparison(filtered)
 
     # Phase 3 Batches 9 + 10: chart selection without leaving Executive Overview.
     render_chart_studio(filtered, calculations)
