@@ -66,7 +66,12 @@ def revenue_by_period(
     values = pd.to_numeric(pd.Series(revenue).reset_index(drop=True), errors="coerce")
     if values.isna().any() or (~values.map(math.isfinite)).any():
         raise ValueError("Revenue contains missing or nonnumeric values. Correct these before measuring growth.")
-    parsed = pd.to_datetime(pd.Series(dates).reset_index(drop=True), errors="coerce", format="mixed")
+    try:
+        parsed = pd.to_datetime(pd.Series(dates).reset_index(drop=True), errors="coerce", format="mixed")
+        if not pd.api.types.is_datetime64_any_dtype(parsed):
+            raise ValueError("Mixed time zones or incompatible date formats")
+    except (ValueError, TypeError, OverflowError) as exc:
+        raise ValueError("Date values must use compatible formats and a consistent time zone for period analysis.") from exc
     omitted = int(parsed.isna().sum())
     valid = parsed.notna()
     if not bool(valid.any()):

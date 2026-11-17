@@ -210,11 +210,14 @@ def render_commercial_intelligence(data: pd.DataFrame) -> None:
         with st.expander("Net revenue by period", expanded=False):
             date_field = st.selectbox("Revenue trend date field", date_fields, key="ci_trend_date")
             cadence = st.selectbox("Revenue trend period", ["Monthly", "Quarterly", "Yearly"], key="ci_trend_period")
-            series, excluded = revenue_by_period(data[date_field], calculated["Net Revenue"], cadence)
-            if excluded:
-                st.caption(f"{excluded:,} records with invalid dates excluded.")
-            if not series.empty:
-                st.plotly_chart(px.line(series, x="Period", y="Revenue", title="Net revenue by period"), width="stretch")
+            try:
+                series, excluded = revenue_by_period(data[date_field], calculated["Net Revenue"], cadence)
+                if excluded:
+                    st.caption(f"{excluded:,} records with invalid dates excluded.")
+                if not series.empty:
+                    st.plotly_chart(px.line(series, x="Period", y="Revenue", title="Net revenue by period"), width="stretch")
+            except (ValueError, TypeError, OverflowError) as error:
+                st.warning(f"Revenue trend is unavailable: {error}")
 
     with st.expander("Calculation notes and interpretation"):
         st.markdown("""

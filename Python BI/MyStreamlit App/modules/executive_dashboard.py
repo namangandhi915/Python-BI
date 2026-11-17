@@ -35,9 +35,9 @@ def _render_column_comparison(filtered: pd.DataFrame) -> None:
             st.info("Select two columns to compare.")
 
 
-def _render_dashboard_without_financials(filtered: pd.DataFrame) -> None:
+def _render_dashboard_without_financials(filtered: pd.DataFrame, message: str | None = None) -> None:
     """Keep source-data tools accessible when financial metrics cannot be calculated."""
-    message = "Choose a valid revenue field in Data Workspace → Commercial Intelligence → Financial Performance to use this section."
+    message = message or "Choose a valid revenue field in Data Workspace → Commercial Intelligence → Financial Performance to use this section."
     for title in ("02  ·  Category profitability and transaction exceptions", "03  ·  Compare financial periods"):
         with st.expander(title, expanded=False):
             st.info(message)
@@ -54,7 +54,7 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
     st.caption("Want to change the graph type? Expand Section 05 · Interactive chart studio below; choose bar, line, area, donut, scatter or histogram.")
     if data.empty:
         st.warning("The active dataset has no records.")
-        _render_dashboard_without_financials(data)
+        _render_dashboard_without_financials(data, "Add records to the dataset to use this section.")
         return
 
     numeric = data.select_dtypes(include="number").columns.tolist()
@@ -70,6 +70,7 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
     ]
 
     st.markdown("### Business performance")
+    invalid_date_filter = False
     with st.expander("01  ·  Refine dataset", expanded=True):
         first, second = st.columns(2)
         with first:
@@ -102,15 +103,23 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
                 apply_date_range = st.checkbox(
                     "Restrict records to a date range", value=False, key="ex_use_date_filter"
                 )
-                parsed = pd.to_datetime(data[date_col], errors="coerce", format="mixed").dropna()
-                if not parsed.empty and apply_date_range:
-                    date_bounds = st.date_input(
-                        "Date range", value=(parsed.min().date(), parsed.max().date()),
-                        min_value=parsed.min().date(), max_value=parsed.max().date(),
-                        key=f"ex_date_bounds_{date_col}",
-                    )
-                elif parsed.empty:
-                    st.warning("No valid dates are available in the selected field.")
+                if apply_date_range:
+                    try:
+                        parsed = pd.to_datetime(data[date_col], errors="coerce", format="mixed").dropna()
+                        if not pd.api.types.is_datetime64_any_dtype(parsed):
+                            raise ValueError("Use a consistent time zone for date filtering.")
+                        if not parsed.empty:
+                            date_bounds = st.date_input(
+                                "Date range", value=(parsed.min().date(), parsed.max().date()),
+                                min_value=parsed.min().date(), max_value=parsed.max().date(),
+                                key=f"ex_date_bounds_{date_col}",
+                            )
+                        else:
+                            st.warning("No valid dates are available in the selected field.")
+                            invalid_date_filter = True
+                    except (ValueError, TypeError, OverflowError) as error:
+                        st.warning(f"Date filter unavailable: {error}")
+                        invalid_date_filter = True
     # A partially selected date range must not silently apply only one endpoint.
     start = end = None
     if date_col != "No date filter" and isinstance(date_bounds, (list, tuple)):
@@ -118,6 +127,11 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
             start, end = date_bounds
         else:
             st.info("Choose both endpoints to apply the date filter.")
+            invalid_date_filter = True
+    if invalid_date_filter:
+        st.info("Correct or turn off the date filter to show matching records.")
+        _render_dashboard_without_financials(data.iloc[0:0], "Correct or turn off the date filter to use this section.")
+        return
     try:
         filtered = apply_dashboard_filters(
             data,
@@ -129,12 +143,13 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
         ).reset_index(drop=True)
     except (ValueError, TypeError) as error:
         st.error(f"The filter is invalid: {error}")
+        _render_dashboard_without_financials(data.iloc[0:0], "Correct the filter to use this section.")
         return
 
     st.caption(f"{len(filtered):,} of {len(data):,} records matched the filters.")
     if filtered.empty:
         st.warning("No records match. Adjust the filters to continue.")
-        _render_dashboard_without_financials(filtered)
+        _render_dashboard_without_financials(filtered, "Adjust the filters to include records in this section.")
         return
 
     mapping = st.session_state.get("commercial_mapping", {})
@@ -227,7 +242,7 @@ def render_executive_dashboard(data: pd.DataFrame, dataset_name: str) -> None:
                         st.caption("Growth is calculated only for adjacent periods with positive prior-period revenue.")
                 else:
                     st.info("No valid dated records remain after filtering.")
-            except ValueError as error:
+            except (ValueError, TypeError, OverflowError) as error:
                 st.warning(f"Cannot calculate the trend: {error}")
 
     with st.expander("02  ·  Category profitability and transaction exceptions", expanded=False):

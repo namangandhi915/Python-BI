@@ -776,20 +776,21 @@ elif page == "Data Workspace":
 
 
     else:
-        if "uploaded_df" in st.session_state:
-            current_data = st.session_state["uploaded_df"]
-            commercial_view = st.radio(
-                "Commercial tools",
-                ["Financial Performance", "Business Planning"],
-                horizontal=True,
-                key="commercial_view",
-            )
-            if commercial_view == "Financial Performance":
+        commercial_view = st.radio(
+            "Commercial tools",
+            ["Financial Performance", "Business Planning"],
+            horizontal=True,
+            key="commercial_view",
+        )
+        if commercial_view == "Financial Performance":
+            if "uploaded_df" in st.session_state:
+                current_data = st.session_state["uploaded_df"]
                 render_commercial_intelligence(current_data)
             else:
-                render_planning_workspace(current_data)
+                st.info("Upload or activate a dataset to calculate financial performance.")
         else:
-            st.info("Upload or activate a dataset in Data Workspace first.")
+            current_data = st.session_state.get("uploaded_df", pd.DataFrame())
+            render_planning_workspace(current_data)
 
 
 elif page == "Investment Intelligence":
